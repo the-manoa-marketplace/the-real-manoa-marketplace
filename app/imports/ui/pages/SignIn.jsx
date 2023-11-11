@@ -1,27 +1,22 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
+import { Alert, Card, Col, Container, Row, FormCheck } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
 
-/**
- * Signin page overrides the form’s submit event and call Meteor’s loginWithPassword().
- * Authentication errors modify the component’s state to be displayed
- */
 const SignIn = () => {
   const [error, setError] = useState('');
   const [redirect, setRedirect] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const schema = new SimpleSchema({
     email: String,
     password: String,
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
-  // Handle Signin submission using Meteor's account mechanism.
   const submit = (doc) => {
-    // console.log('submit', doc, redirect);
     const { email, password } = doc;
     Meteor.loginWithPassword(email, password, (err) => {
       if (err) {
@@ -30,44 +25,45 @@ const SignIn = () => {
         setRedirect(true);
       }
     });
-    // console.log('submit2', email, password, error, redirect);
   };
 
-  // Render the signin form.
-  // console.log('render', error, redirect);
-  // if correct authentication, redirect to page instead of login screen
   if (redirect) {
     return (<Navigate to="/" />);
   }
-  // Otherwise return the Login form.
+
   return (
     <Container id="signin-page" className="py-3">
       <Row className="justify-content-center">
-        <Col xs={5}>
-          <Col className="text-center">
-            <h2>Login to your account</h2>
-          </Col>
+        <Col md={6} className="signin-form">
+          <h2>Login to your account</h2>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
-                <TextField id="signin-form-email" name="email" placeholder="E-mail address" />
-                <TextField id="signin-form-password" name="password" placeholder="Password" type="password" />
+                <TextField name="email" placeholder="E-mail address" />
+                <TextField name="password" placeholder="Password" type="password" />
+                <FormCheck
+                  type="checkbox"
+                  label="Remember me"
+                  onChange={() => setRememberMe(!rememberMe)}
+                />
                 <ErrorsField />
-                <SubmitField id="signin-form-submit" />
+                <SubmitField />
               </Card.Body>
             </Card>
           </AutoForm>
+          <Link to="/forgot-password">Forgot password?</Link>
           <Alert variant="light">
             <Link to="/signup">Click here to Register</Link>
           </Alert>
-          {error === '' ? (
-            ''
-          ) : (
+          {error && (
             <Alert variant="danger">
               <Alert.Heading>Login was not successful</Alert.Heading>
               {error}
             </Alert>
           )}
+        </Col>
+        <Col md={6} className="signin-image">
+          {/* Insert an image or a welcome message here */}
         </Col>
       </Row>
     </Container>
