@@ -1,13 +1,15 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "email": "ei4@hawaii.edu", "password": "changeme", "role": "admin" },
+    { "email": "bunder@hawaii.edu", "password": "changeme" },
+    { "email": "poseym@hawaii.edu", "password": "changeme" },
+    { "email": "zstoddar@hawaii.edu", "password": "changeme" },
+    { "email": "rstagen@hawaii.edu", "password": "changeme" }
   ],
 
   "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+    { "name": "RSX Type-S", "quantity": 1, "owner": "rstagen@hawaii.edu", "condition": "used-good" },
+    { "name": "Kitty Cat", "quantity": 1, "owner": "bunder@hawaii.edu", "condition": "alive-healthy" },
+    { "name": "Rice Bag", "quantity": 1, "owner": "ei4@hawaii.edu", "condition": "good" }
   ]
 }
