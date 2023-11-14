@@ -13,5 +13,11 @@
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
     { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+  ],
+
+  "defaultListings": [
+    { "listingTitle": "Mustang", "price": 50000, "owner": "john@foo.com", "condition": "Factory New", "tags": "Vehicle", "Description": "Car" },
+    { "listingTitle": "Spider-man", "price": 10, "owner": "john@foo.com", "condition": "Factory New", "tags": "Games", "Description": "Toy" },
+    { "listingTitle": "Hydro flask", "price": 5, "owner": "john@foo.com", "condition": "Fair", "tags": "Other", "Description": "Bottle" }
   ]
 }
