@@ -24,7 +24,7 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mx-auto text-center">
                         {currentUser ? ([
-                            <Nav.Link id="listings-nav" as={NavLink} to="/listings" key="listings">Home</Nav.Link>,
+                            <Nav.Link id="listings-nav" as={NavLink} to="/home" key="home">Home</Nav.Link>,
                             <Nav.Link id="my-listings-nav" as={NavLink} to="/mylistings" key="mylistings">YourListing's</Nav.Link>,
                             <Nav.Link id="sell-listings-nav" as={NavLink} to="/sell" key="sell">Sell</Nav.Link>,
                         ]) : ''}
