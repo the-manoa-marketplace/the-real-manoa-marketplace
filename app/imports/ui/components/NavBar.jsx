@@ -24,9 +24,9 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mx-auto text-center">
                         {currentUser ? ([
-                            <Nav.Link id="recent-listings-nav" as={NavLink} to="/add" key="add">Home</Nav.Link>,
-                            <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="list">YourListing's</Nav.Link>,
-                            <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="list">Sell</Nav.Link>,
+                            <Nav.Link id="listings-nav" as={NavLink} to="/listings" key="listings">Home</Nav.Link>,
+                            <Nav.Link id="my-listings-nav" as={NavLink} to="/mylistings" key="mylistings">YourListing's</Nav.Link>,
+                            <Nav.Link id="sell-listings-nav" as={NavLink} to="/sell" key="sell">Sell</Nav.Link>,
                         ]) : ''}
                         {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
                             <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin">Admin</Nav.Link>
