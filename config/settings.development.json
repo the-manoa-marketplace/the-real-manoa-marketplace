@@ -6,7 +6,7 @@
     { "email": "rstagen@hawaii.edu", "password": "changeme", "role": "admin"},
     { "email": "zstoddard@hawaii.edu", "password": "changeme", "role": "admin"},
     { "email": "mposey@hawaii.edu", "password": "changeme", "role": "admin"}
-],
+  ],
 
   "defaultData": [
     { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
@@ -19,5 +19,5 @@
     { "listingTitle": "Mustang", "price": 50000, "owner": "john@foo.com", "condition": "Factory New", "tags": "Vehicle", "Description": "Car" },
     { "listingTitle": "Spider-man", "price": 10, "owner": "john@foo.com", "condition": "Factory New", "tags": "Games", "Description": "Toy" },
     { "listingTitle": "Hydro flask", "price": 5, "owner": "john@foo.com", "condition": "Fair", "tags": "Other", "Description": "Bottle" }
-    ]
-  }
+  ]
+}

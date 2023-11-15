@@ -1,12 +1,18 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Col } from 'react-bootstrap';
+import { Col, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
-/* After the user clicks the "SignOut" link in the NavBar, log them out and display this page. */
 const SignOut = () => {
+  const navigate = useNavigate();
   Meteor.logout();
+
   return (
-    <Col id="signout-page" className="text-center py-3"><h2>You are signed out.</h2></Col>
+    <Col id="signout-page" className="text-center py-3">
+      <h2>You are signed out.</h2>
+      <Button onClick={() => navigate('/signin')}>Sign In Again</Button>
+      <Button variant="secondary" onClick={() => navigate('/')}>Return Home</Button>
+    </Col>
   );
 };
 
