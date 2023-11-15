@@ -20,7 +20,7 @@ const User_Page = () => {
         </ListGroup>
         <Card.Body>
           <Card.Link href="#">Listings</Card.Link>
-          <Card.Link href="#">Edit Profile</Card.Link>
+          <Card.Link href="#EditUserPage">Edit Profile</Card.Link>
         </Card.Body>
       </Card>
     </Container>
