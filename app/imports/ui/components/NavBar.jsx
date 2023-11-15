@@ -16,14 +16,13 @@ const NavBar = () => {
         <Navbar bg="light" expand="lg">
             <Container>
                 <Nav className="justify-content-start">
-                    <Navbar.Brand as={NavLink} to="/" >
-                       <img src="/images/uhmainlogo.png" className="custom-img" alt="UHM main logo"/>
-                        <h2>MARKETPLACE</h2>
+                    <Navbar.Brand as={NavLink} to="/">
+                        <img src="/images/uhmainlogo.png" className="custom-img" alt="UHM main logo"/> MARKETPLACE
                     </Navbar.Brand>
                 </Nav>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto justify-content-center">
+                    <Nav className="mx-auto text-center">
                         {currentUser ? ([
                             <Nav.Link id="add-stuff-nav" as={NavLink} to="/add" key="add">Home</Nav.Link>,
                             <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="list">YourListing's</Nav.Link>,
