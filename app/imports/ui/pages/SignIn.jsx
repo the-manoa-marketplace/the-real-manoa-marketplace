@@ -34,8 +34,8 @@ const SignIn = () => {
   return (
     <Container id="signin-page" className="py-3">
       <Row className="justify-content-center">
-        <Col md={6} className="signin-form">
-          <h2>Login to your account</h2>
+        <Col md={6}>
+          <h2 className="text-center">Login to your account</h2>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
@@ -47,24 +47,27 @@ const SignIn = () => {
                   onChange={() => setRememberMe(!rememberMe)}
                 />
                 <ErrorsField />
-                <SubmitField />
+                <SubmitField className="d-block mx-auto" />
               </Card.Body>
             </Card>
           </AutoForm>
-          <Link to="/forgot-password">Forgot password?</Link>
-          <Alert variant="light">
+          <div className="text-center">
+            <Link to="/forgot-password">Forgot password?</Link>
+          </div>
+          <Alert variant="light" className="text-center">
             <Link to="/signup">Click here to Register</Link>
           </Alert>
           {error && (
             <Alert variant="danger">
               <Alert.Heading>Login was not successful</Alert.Heading>
-              {error}
+              <p className="text-center">{error}</p>
             </Alert>
           )}
         </Col>
-        <Col md={6} className="signin-image">
-          {/* Insert an image or a welcome message here */}
-        </Col>
+        {/* Optional: Second column for the image or welcome message */}
+        {/* <Col md={6} className="signin-image">
+          // Insert an image or a welcome message here
+        </Col> */}
       </Row>
     </Container>
   );
