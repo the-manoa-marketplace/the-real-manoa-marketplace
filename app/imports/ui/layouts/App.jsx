@@ -18,11 +18,9 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
-<<<<<<< HEAD
 import User_Page from '../pages/User_Page';
-=======
 import MyListings from '../pages/MyListings';
->>>>>>> main
+
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
