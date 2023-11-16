@@ -34,7 +34,7 @@ const NavBar = () => {
                     </Nav>
                     <Nav className="justify-content-end">
                         {currentUser ? ([
-                            <div className="ml-auto">
+                            <div className="py-2" >
                                 <BellFill />
                             </div>
                         ]) : ''}
