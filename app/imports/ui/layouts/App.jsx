@@ -20,6 +20,8 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import User_Page from '../pages/User_Page';
 import MyListings from '../pages/MyListings';
 
+import ItemsForSale from '../pages/ItemsForSale';
+
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
   const { ready } = useTracker(() => {
@@ -35,6 +37,8 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/User_Page" element={<User_Page />} />
+          <Route path="/ItemsForSale" element={<ItemsForSale />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route exact path="/" element={<ProtectedRoute><RecentListing /></ProtectedRoute>} />
