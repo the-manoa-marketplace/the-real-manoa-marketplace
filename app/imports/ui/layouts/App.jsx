@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import RecentListing from '../pages/RecentListing';
-import ListStuff from '../pages/ListStuff';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddListing from '../pages/AddListing';
 import EditStuff from '../pages/EditStuff';
@@ -18,11 +17,8 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
-<<<<<<< HEAD
 import User_Page from '../pages/User_Page';
-=======
 import MyListings from '../pages/MyListings';
->>>>>>> main
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -39,10 +35,10 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/User_Page" element={<User_Page />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route exact path="/" element={<ProtectedRoute><RecentListing /></ProtectedRoute>} />
+          <Route exact path="/profile" element={<ProtectedRoute><User_Page /></ProtectedRoute>} />
           <Route path="/home" element={<ProtectedRoute><RecentListing /></ProtectedRoute>} />
           <Route path="/sell" element={<ProtectedRoute><AddListing /></ProtectedRoute>} />
           <Route path="/mylistings" element={<ProtectedRoute><MyListings /></ProtectedRoute>} />
