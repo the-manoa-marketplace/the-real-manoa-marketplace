@@ -28,17 +28,20 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 const AddListing = () => {
 
   // On submit, insert the data.
-  const submit = (data, formRef) => {
-    const { listingTitle, price, condition, tags } = data;
+  const submit = (data /* , formRef */) => {
+    const { listingTitle, price, condition, description, tags } = data;
     const owner = Meteor.user().username;
     Listings.collection.insert(
-      { listingTitle, price, condition, tags, owner },
+      { listingTitle, price, condition, description, tags, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Item added successfully', 'success');
-          formRef.reset();
+          swal('Success', 'Item added successfully', 'success').then(() => {
+            // eslint-disable-next-line no-restricted-globals
+            location.href = '/mylistings';
+          });
+          // formRef.reset();
         }
       },
     );

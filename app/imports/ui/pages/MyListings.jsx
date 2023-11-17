@@ -36,9 +36,10 @@ const MyListings = () => {
                 <th>Name</th>
                 <th>Price</th>
                 <th>Quantity</th>
+                <th>Description</th>
                 <th>Condition</th>
-                <th>tags</th>
-                <th>edit</th>
+                <th>Tags</th>
+                <th>Edit</th>
               </tr>
             </thead>
             <tbody>

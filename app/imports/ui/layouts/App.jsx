@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddListing from '../pages/AddListing';
-import EditStuff from '../pages/EditStuff';
+import EditListing from '../pages/EditListing';
 import NotFound from '../pages/NotFound';
 import SignUp from '../pages/SignUp';
 import SignOut from '../pages/SignOut';
@@ -44,7 +44,7 @@ const App = () => {
           <Route path="/home" element={<ProtectedRoute><ItemsForSale /></ProtectedRoute>} />
           <Route path="/sell" element={<ProtectedRoute><AddListing /></ProtectedRoute>} />
           <Route path="/mylistings" element={<ProtectedRoute><MyListings /></ProtectedRoute>} />
-          <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
+          <Route path="/edit/:_id" element={<ProtectedRoute><EditListing /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />

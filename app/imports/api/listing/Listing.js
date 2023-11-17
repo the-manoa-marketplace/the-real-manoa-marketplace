@@ -15,6 +15,7 @@ class ListingsCollection {
       listingTitle: String,
       price: Number,
       owner: String,
+      description: String,
       condition: {
         type: String,
         allowedValues: ['Factory New', 'Like New', 'Fair', 'Field-Tested'],

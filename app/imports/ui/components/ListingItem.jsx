@@ -8,6 +8,7 @@ const ListingItem = ({ listing }) => (
     <td>{listing.listingTitle}</td>
     <td>{listing.price}</td>
     <td>{listing.owner}</td>
+    <td>{listing.description}</td>
     <td>{listing.condition}</td>
     <td>{listing.tags}</td>
 
@@ -24,6 +25,7 @@ ListingItem.propTypes = {
     price: PropTypes.number,
     condition: PropTypes.string,
     owner: PropTypes.string,
+    description: PropTypes.string,
     tags: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
