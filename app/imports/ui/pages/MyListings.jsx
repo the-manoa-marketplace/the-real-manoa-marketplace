@@ -3,13 +3,13 @@ import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Listings } from '../../api/listing/Listing';
-import StuffItem from '../components/StuffItem';
+import ListingItem from '../components/ListingItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const MyListings = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, stuffs } = useTracker(() => {
+  const { ready, listings } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Stuff documents.
@@ -17,9 +17,9 @@ const MyListings = () => {
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Stuff documents
-    const stuffItems = Listings.collection.find({}).fetch();
+    const listingItem = Listings.collection.find({}).fetch();
     return {
-      stuffs: stuffItems,
+      listings: listingItem,
       ready: rdy,
     };
   }, []);
@@ -37,10 +37,12 @@ const MyListings = () => {
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Condition</th>
+                <th>tags</th>
+                <th>edit</th>
               </tr>
             </thead>
             <tbody>
-              {stuffs.map((stuff) => <StuffItem key={stuff._id} stuff={stuff} />)}
+              {listings.map((listing) => <ListingItem key={listing._id} listing={listing} />)}
             </tbody>
           </Table>
         </Col>

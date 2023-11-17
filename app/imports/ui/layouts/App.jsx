@@ -16,7 +16,7 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
-import User_Page from '../pages/User_Page';
+import UserPage from '../pages/UserPage';
 import MyListings from '../pages/MyListings';
 import ItemsForSale from '../pages/ItemsForSale';
 
@@ -35,12 +35,12 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/User_Page" element={<User_Page />} />
+          <Route path="/UserPage" element={<UserPage />} />
           <Route path="/ItemsForSale" element={<ItemsForSale />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route exact path="/" element={<ProtectedRoute><ItemsForSale /></ProtectedRoute>} />
-          <Route exact path="/profile" element={<ProtectedRoute><User_Page /></ProtectedRoute>} />
+          <Route exact path="/profile" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
           <Route path="/home" element={<ProtectedRoute><ItemsForSale /></ProtectedRoute>} />
           <Route path="/sell" element={<ProtectedRoute><AddListing /></ProtectedRoute>} />
           <Route path="/mylistings" element={<ProtectedRoute><MyListings /></ProtectedRoute>} />

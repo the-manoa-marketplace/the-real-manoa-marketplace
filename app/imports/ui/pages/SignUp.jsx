@@ -68,6 +68,7 @@ const SignUp = ({ location }) => {
 
 SignUp.propTypes = {
   location: PropTypes.shape({
+    // eslint-disable-next-line react/forbid-prop-types
     state: PropTypes.object,
   }),
 };

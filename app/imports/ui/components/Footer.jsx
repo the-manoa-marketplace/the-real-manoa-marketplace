@@ -14,9 +14,9 @@ const Footer = () => (
         Honolulu, HI 96822
         {' '}
         <br />
-          <a href="http://ics-software-engineering.github.io/meteor-application-template-react">
-              Contact Us
-          </a>
+        <a href="http://ics-software-engineering.github.io/meteor-application-template-react">
+          Contact Us
+        </a>
       </Col>
     </Container>
   </footer>

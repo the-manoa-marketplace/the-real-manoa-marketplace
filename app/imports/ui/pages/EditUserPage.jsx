@@ -1,12 +1,8 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 
-const EditUserPage = () => {
+const EditUserPage = () => (
+  <Container className="d-flex align-items-center justify-content-center" />
+);
 
-  return (
-    <Container className="d-flex align-items-center justify-content-center">
-
-    </Container>
-  );
-
-};
+export default EditUserPage;
