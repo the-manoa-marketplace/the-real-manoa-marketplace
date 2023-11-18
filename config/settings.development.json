@@ -17,8 +17,8 @@
   ],
 
   "defaultListings": [
-    { "listingTitle": "Mustang", "price": 50000, "owner": "john@foo.com", "condition": "Factory New", "tags": "Vehicle", "Description": "Car" },
-    { "listingTitle": "Spider-man", "price": 10, "owner": "john@foo.com", "condition": "Factory New", "tags": "Games", "Description": "Toy" },
-    { "listingTitle": "Hydro flask", "price": 5, "owner": "john@foo.com", "condition": "Fair", "tags": "Other", "Description": "Bottle" }
+    { "listingTitle": "Mustang", "price": 50000, "owner": "john@foo.com", "condition": "Factory New", "tags": "Vehicle", "description": "Car" },
+    { "listingTitle": "Spider-man", "price": 10, "owner": "john@foo.com", "condition": "Factory New", "tags": "Games", "description": "Toy" },
+    { "listingTitle": "Hydro flask", "price": 5, "owner": "john@foo.com", "condition": "Fair", "tags": "Other", "description": "Bottle" }
   ]
 }

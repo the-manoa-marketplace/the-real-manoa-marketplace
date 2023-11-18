@@ -1,4 +1,4 @@
-{
+
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
     { "email": "john@foo.com", "password": "changeme" }
@@ -11,6 +11,17 @@
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
   ],
 
+  "defaultListings": [
+    { "listingTitle": "Mustang", "price": 50000, "owner": "john@foo.com", "condition": "Factory New", "tags": "Vehicle", "description": "Car" },
+    { "listingTitle": "Spider-man", "price": 10, "owner": "john@foo.com", "condition": "Factory New", "tags": "Games", "description": "Toy" },
+    { "listingTitle": "Hydro flask", "price": 5, "owner": "john@foo.com", "condition": "Fair", "tags": "Other", "description": "Bottle" }
+  ],
+
+  "public": {
+    "cloudinary": {
+      "cloudName": "ddfut4ysa"
+    }
+  },
   "monti": {
     "appId": "changeme",
     "appSecret": "changeme"
