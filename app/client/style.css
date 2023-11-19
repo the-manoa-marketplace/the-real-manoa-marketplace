@@ -5,15 +5,17 @@
 :root {
   --matr-navbar-bg: #ECECEC;
   --matr-navbar-bg-rgb: 236, 236, 236;
+
 }
+
 
 /* Change bootstrap variable values.
  See https://getbootstrap.com/docs/5.2/customize/css-variables/
  */
 body {
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
-  background-color: #014633; /* Changed background to color code #014633 */
-  /* Removed background image properties */
+  background: fixed center url("images/tealgreen.jpg");
+  background-size: cover;
 }
 
 /* Set the alert background on the signin and signup pages. */
@@ -28,6 +30,7 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
 
 .custom-img {
   height: 50px;
