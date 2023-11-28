@@ -21,9 +21,10 @@ const Footer = () => (
             <a href="https://www.youtube.com/@universityofhawaiiatmanoa-2732?si=GcBqK9quLwZY0xAk" className="nav-link">
                 <Youtube size={30} className="mx-5" />
             </a>
-            <span className="slclassName="nav-link">
+            <span className="slash">/</span>
+            <a href="https://www.linkedin.com/school/uhmanoa/" className="nav-link">
                 <Linkedin size={30} className="mx-5" />
-            </>
+            </a>
         </div>
         <Container className="mt-auto">
             <Row className="mt-3 d-flex align-items-center">
