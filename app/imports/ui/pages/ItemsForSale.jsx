@@ -1,20 +1,13 @@
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import SideBar from '../components/SideBar';
 
 const ItemsForSale = () => (
   <Container fluid>
     <Row>
       {/* Sidebar */}
-      <Col xs={3} className="bg-transparent p-3">
-        <h5>Filters</h5>
-        <ul>
-          <li>Electronic</li>
-          <li>Apparel</li>
-          <li>Vehicles</li>
-          <li>Games</li>
-          <li>Housewares</li>
-          <li>Others</li>
-        </ul>
+      <Col xs={3}>
+        <SideBar />
       </Col>
       {/* Content */}
       <Col xs={9} className="p-3">
