@@ -13,7 +13,7 @@ const NavBar = () => {
   }), []);
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar expand="lg" className="navbar">
       <Container>
         <Nav className="justify-content-start">
           <Navbar.Brand as={NavLink} to="/">

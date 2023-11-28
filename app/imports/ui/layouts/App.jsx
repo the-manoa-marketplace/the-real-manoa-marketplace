@@ -19,6 +19,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import UserPage from '../pages/UserPage';
 import MyListings from '../pages/MyListings';
 import ItemsForSale from '../pages/ItemsForSale';
+import EditUserPage from '../pages/EditUserPage';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
           <Route exact path="/" element={<Landing />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/UserPage" element={<UserPage />} />
+          <Route path="/EditUserPage" element={<EditUserPage />} />
           <Route path="/ItemsForSale" element={<ItemsForSale />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
