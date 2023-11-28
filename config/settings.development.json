@@ -20,5 +20,49 @@
     { "listingTitle": "Mustang", "price": 50000, "owner": "john@foo.com", "condition": "Factory New", "tags": "Vehicle", "description": "Car" },
     { "listingTitle": "Spider-man", "price": 10, "owner": "john@foo.com", "condition": "Factory New", "tags": "Games", "description": "Toy" },
     { "listingTitle": "Hydro flask", "price": 5, "owner": "john@foo.com", "condition": "Fair", "tags": "Other", "description": "Bottle" }
+  ],
+
+  "defaultProfiles": [{
+    "firstName": "John", "lastName": "Foo", "address": "POST 307, University of Hawaii",
+    "image": "https://github.com/philipmjohnson.png",
+    "description": "I am a Professor of Information and Computer Sciences at the University of Hawaii, Director of the Collaborative Software Development Laboratory, and the CEO of OpenPowerQuality.com.",
+    "owner": "john@foo.com"
+    },
+    {
+      "firstName": "Admin", "lastName": "Foo", "address": "POST 307, University of Hawaii",
+      "image": "https://avatars0.githubusercontent.com/u/7494478?s=460&v=4",
+      "description": "I like to play League of Legends and watch anime with my Waifus.",
+      "owner": "admin@foo.com"
+    },
+    {
+      "firstName": "Elijah", "lastName": "Inofinada", "address": "Ho Chi Minh city, Vietnam",
+      "image": "https://avatars.githubusercontent.com/u/102901526?v=4",
+      "description": "I like to listen to music and waste money on clothes and car parts. XD UWU",
+      "owner": "ei4@hawaii.edu"
+    },
+    {
+      "firstName": "Brandon", "lastName": "Underwood", "address": "Taipei City, Taiwan",
+      "image": "https://avatars.githubusercontent.com/u/103099466?v=4",
+      "description": "I drive a 2021 WRX STI. Former Top 500 on Overwatch BTW....",
+      "owner": "bunder@hawaii.edu"
+    },
+    {
+      "firstName": "Zachary", "lastName": "Stoddard", "address": "Wakanda",
+      "image": "https://avatars.githubusercontent.com/u/102337680?v=4",
+      "description": "I eat dogs... I mean I like dogs. Labradors taste the best!",
+      "owner": "zstoddar@hawaii.edu"
+    },
+    {
+      "firstName": "Ryne", "lastName": "Stagen", "address": "Dhaka, Bangladesh",
+      "image": "https://avatars.githubusercontent.com/u/102770968?v=4",
+      "description": "I play the piano and cant drive manual cause Im blind and short :/",
+      "owner": "rstagen@hawaii.edu"
+    },
+    {
+      "firstName": "Mark", "lastName": "Posey", "address": "Mililani, Hawaii",
+      "image": "https://avatars.githubusercontent.com/u/143592021?v=4",
+      "description": "Top G fr",
+      "owner": "mposey@hawaii.edu"
+    }
   ]
 }

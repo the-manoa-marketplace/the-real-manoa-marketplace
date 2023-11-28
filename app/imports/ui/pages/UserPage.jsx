@@ -1,26 +1,43 @@
 import React from 'react';
-import { Container, Card, ListGroup } from 'react-bootstrap';
+import { Meteor } from 'meteor/meteor';
+import { Col, Container, Row } from 'react-bootstrap';
+import { useTracker } from 'meteor/react-meteor-data';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { Profiles } from '../../api/Profile/Profiles';
+import Profile from '../components/Profile';
 
-const User_Page = () => (
-  <Container className="d-flex align-items-center justify-content-center">
-    <Card style={{ width: '30rem' }} className="d-flex align-items-center justify-content-center">
-      <Card.Img variant="top" src="https://www.pngplay.com/wp-content/uploads/2/Patrick-Star-PNG-Background.png" style={{ width: '50%', height: 'auto' }} />
-      <Card.Body>
-        <Card.Title>Profile</Card.Title>
-        <Card.Text className="mb-2 text-muted">
-          Gunga gingan gunga gingan
-        </Card.Text>
-      </Card.Body>
-      <ListGroup className="list-group-flush">
-        <ListGroup.Item>Patrick Star</ListGroup.Item>
-        <ListGroup.Item>patrick.star@bikinibottom.com</ListGroup.Item>
-        <ListGroup.Item>123-456-789</ListGroup.Item>
-      </ListGroup>
-      <Card.Body>
-        <Card.Link href="/MyListings">Listings</Card.Link>
-        <Card.Link href="/EditUserPage">Edit Profile</Card.Link>
-      </Card.Body>
-    </Card>
-  </Container>
-);
-export default User_Page;
+/* Renders a table containing all of the Profile documents. Use <StuffItem> to render each row. */
+const UserPage = () => {
+  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+  const { ready, profiles } = useTracker(() => {
+    // Note that this subscription will get cleaned up
+    // when your component is unmounted or deps change.
+    // Get access to Stuff documents.
+    const subscription = Meteor.subscribe(Profiles.userPublicationName);
+    // Determine if the subscription is ready
+    const rdy = subscription.ready();
+    // Get the Profile documents
+    const profileItems = Profiles.collection.find({}).fetch();
+    return {
+      contacts: profileItems,
+      ready: rdy,
+    };
+  }, []);
+
+  return (ready ? (
+      <Container className="py-3">
+        <Row className="justify-content-center">
+          <Col md={7}>
+            <Col className="text-center">
+              <h2>Your Profile</h2>
+            </Col>
+            <Row xs={1} md={2} lg={3} className="g-4">
+              {profiles.map((profile, index) => (<Col key={index}><Profile profile={profile} /></Col>))}
+            </Row>
+          </Col>
+        </Row>
+      </Container>
+  ) : <LoadingSpinner />);
+};
+
+export default UserPage;

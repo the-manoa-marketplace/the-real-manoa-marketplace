@@ -17,6 +17,7 @@ import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import UserPage from '../pages/UserPage';
+import AddProfile from '../pages/AddProfile';
 import MyListings from '../pages/MyListings';
 import ItemsForSale from '../pages/ItemsForSale';
 import EditUserPage from '../pages/EditUserPage';
@@ -40,13 +41,12 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/UserPage" element={<UserPage />} />
-          <Route path="/EditUserPage" element={<EditUserPage />} />
           <Route path="/ItemsForSale" element={<ItemsForSale />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route exact path="/" element={<ProtectedRoute><ItemsForSale /></ProtectedRoute>} />
           <Route exact path="/profile" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
+          <Route exact path="/editprofile" element={<ProtectedRoute><EditUserPage /></ProtectedRoute>} />
           <Route exact path="/contactus" element={<ProtectedRoute><ContactUs /></ProtectedRoute>} />
           <Route exact path="/tos" element={<ProtectedRoute><TermsOfService /></ProtectedRoute>} />
           <Route exact path="/pp" element={<ProtectedRoute><PrivacyPolicy /></ProtectedRoute>} />
