@@ -36,7 +36,9 @@ const NavBar = () => {
           <Nav className="justify-content-end">
             {currentUser ? ([
               <div className="py-2">
-                <BellFill />
+                <BellFill
+
+                />
               </div>,
             ]) : ''}
             {currentUser === '' ? (

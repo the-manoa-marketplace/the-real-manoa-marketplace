@@ -30,13 +30,13 @@ const Footer = () => (
       <Row className="mt-3 d-flex align-items-center">
         <Col className="d-flex flex-column">
           <nav>
-            <NavLink to="/home" className="nav-link mb-2 text-white">
+            <NavLink to="/" className="nav-link mb-2 text-white">
               About Us
             </NavLink>
-            <NavLink to="/home" className="nav-link mb-2 text-white">
+            <a href="https://myuh.hawaii.edu/" className="nav-link mb-2 text-white">
               MyUH
-            </NavLink>
-            <NavLink to="/home" className="nav-link mb-2 text-white">
+            </a>
+            <NavLink to="/meettheteam" className="nav-link mb-2 text-white">
               Meet The Team
             </NavLink>
           </nav>
@@ -48,13 +48,13 @@ const Footer = () => (
         </Col>
         <Col className="text-right d-flex flex-column align-items-end">
           <nav>
-            <NavLink to="/home" className="nav-link mb-2 text-white">
+            <NavLink to="/tos" className="nav-link mb-2 text-white">
               Terms of Service
             </NavLink>
-            <NavLink to="/home" className="nav-link mb-2 text-white">
+            <NavLink to="/pp" className="nav-link mb-2 text-white">
               Privacy Policy
             </NavLink>
-            <NavLink to="/home" className="nav-link mb-2 text-white">
+            <NavLink to="/contactus" className="nav-link mb-2 text-white">
               Contact Us
             </NavLink>
           </nav>

@@ -20,6 +20,10 @@ import UserPage from '../pages/UserPage';
 import MyListings from '../pages/MyListings';
 import ItemsForSale from '../pages/ItemsForSale';
 import EditUserPage from '../pages/EditUserPage';
+import ContactUs from '../pages/ContactUs';
+import TermsOfService from '../pages/TermsOfService';
+import PrivacyPolicy from '../pages/PrivacyPolicy';
+import MeetTheTeam from '../pages/MeetTheTeam';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -43,6 +47,10 @@ const App = () => {
           <Route path="/signout" element={<SignOut />} />
           <Route exact path="/" element={<ProtectedRoute><ItemsForSale /></ProtectedRoute>} />
           <Route exact path="/profile" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
+          <Route exact path="/contactus" element={<ProtectedRoute><ContactUs /></ProtectedRoute>} />
+          <Route exact path="/tos" element={<ProtectedRoute><TermsOfService /></ProtectedRoute>} />
+          <Route exact path="/pp" element={<ProtectedRoute><PrivacyPolicy /></ProtectedRoute>} />
+          <Route exact path="/meettheteam" element={<ProtectedRoute><MeetTheTeam /></ProtectedRoute>} />
           <Route path="/home" element={<ProtectedRoute><ItemsForSale /></ProtectedRoute>} />
           <Route path="/sell" element={<ProtectedRoute><AddListing /></ProtectedRoute>} />
           <Route path="/mylistings" element={<ProtectedRoute><MyListings /></ProtectedRoute>} />
