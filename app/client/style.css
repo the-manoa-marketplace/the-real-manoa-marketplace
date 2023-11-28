@@ -1,21 +1,26 @@
-/* Use Open Sans as the default sans serif font. */
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700|Source+Code+Pro:300,400,500,700");
+@import url("https://fonts.googleapis.com/css?family=Nunito:300,400,700");
 
-/* Set up some CSS variables to theme the application. */
 :root {
-  --matr-navbar-bg: #ECECEC;
-  --matr-navbar-bg-rgb: 236, 236, 236;
+  --main-bg-color: #ECECEC;
+  --main-bg-color-rgb: 236, 236, 236;
+  --primary-font: 'Nunito', sans-serif;
+}
 
+html, body {
+  height: 100%;
+}
+
+body {
+  --bs-light-rgb: var(--matr-navbar-bg-rgb);
+  background: fixed center url("images/realB.png");
+  background-size: cover;
 }
 
 
-/* Change bootstrap variable values.
- See https://getbootstrap.com/docs/5.2/customize/css-variables/
- */
-body {
-  --bs-light-rgb: var(--matr-navbar-bg-rgb);
-  background: fixed center url("images/BU1.png");
-  background-size: cover;
+.customfooter {
+  background-color: #ededed;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
 }
 
 body::after {
@@ -23,28 +28,39 @@ body::after {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.5); /* Adjust the opacity here */
-  z-index: -1; /* Ensure it stays in the background */
+  right: 0; /* Added to ensure full width */
+  bottom: 0; /* Added to ensure full height */
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: -1;
 }
 
-/* Set the alert background on the signin and signup pages. */
-#signin-page .alert-light, #signup-page .alert-light {
-  --bs-alert-bg: var(--matr-navbar-bg);
-}
-
-/* Define custom styles */
 .gray-background {
-  background-color: var(--matr-navbar-bg);
-  color: var(--bs-dark);
-  padding-top: 10px;
-  padding-bottom: 10px;
+  background-color: var(--main-bg-color);
+  color: #333;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin: 0;
 }
 
+/* Additional modern styles */
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.navbar {
+  background-color: #a1f7d0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Fix for the navbar space issue */
+.navbar-collapse {
+  justify-content: flex-end;
+}
 
 .custom-img {
-  height: 50px;
+  height: auto;
+  max-height: 50px;
 }
 
 .no-left-margin {
@@ -61,4 +77,26 @@ footer {
   font-size: 30px;
   color: black;
   margin: 0 10px;
+}
+
+/* Modernizing form elements */
+input[type=text], input[type=password], input[type=email], select, textarea {
+  border: 1px solid #ddd;
+  padding: .5rem;
+  border-radius: .25rem;
+}
+
+/* Buttons */
+button, .btn {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: .5rem 1rem;
+  border-radius: .25rem;
+  text-transform: uppercase;
+  transition: background-color .3s ease;
+}
+
+button:hover, .btn:hover {
+  background-color: #003d82;
 }
