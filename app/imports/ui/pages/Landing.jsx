@@ -6,6 +6,7 @@ import { useTracker } from 'meteor/react-meteor-data'; // Assuming you use Meteo
 const Landing = () => {
   // Replace this with your actual logged-in check
   const { isLoggedIn } = useTracker(() => ({
+    // eslint-disable-next-line no-undef
     isLoggedIn: !!Meteor.userId(),
   }));
 
@@ -25,6 +26,7 @@ const Landing = () => {
           >
             UHMarketplace provides a centralized space that brings together students from various
             corners of the campus, facilitating the seamless buying and selling of a wide range of
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
             items. Whether you're looking to declutter your living space by parting with everyday
             essentials or showcasing unique knickknacks that might pique the interest of your peers,
             UHMarketplace stands as the optimal platform for fostering connections and transactions
