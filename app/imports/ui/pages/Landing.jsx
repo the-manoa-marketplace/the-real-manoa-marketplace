@@ -7,7 +7,15 @@ const Landing = () => (
     <h1 className="pb-3 text-center display-2">Welcome to UHMarketplace!</h1>
     <Row className="d-flex align-items-center justify-content-center">
       <Col xs={11} xl={9} className="d-flex align-items-center justify-content-center">
-        <p className="w-100 py-3 px-3" style={{ wordSpacing: '2px', lineHeight: 1.8, letterSpacing: '0.4px' }}>
+        <p
+          className="w-100 py-3 px-3"
+          style={{
+            wordSpacing: '2px',
+            lineHeight: '1.8',
+            letterSpacing: '0.4px',
+            fontWeight: 'bold', // Make sure this is camelCase and the value is a string
+          }}
+        >
           UHMarketplace provides a centralized space that brings together students from various
           corners of the campus, facilitating the seamless buying and selling of a wide range of
           {/* eslint-disable-next-line react/no-unescaped-entities */}
