@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Card, Col, Container, Row, Image } from 'react-bootstrap';
 import { AutoForm, ErrorsField, LongTextField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -8,7 +8,6 @@ import SimpleSchema from 'simpl-schema';
 import { Listings } from '../../api/listing/Listing';
 import UploadFile from '../components/UploadFile.jsx';
 
-// Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   listingTitle: String,
   price: Number,
@@ -21,19 +20,35 @@ const formSchema = new SimpleSchema({
     type: String,
     allowedValues: ['Apparel', 'Housewares', 'Vehicle', 'Electronics', 'Games', 'Other'],
   },
+  images: {
+    type: Array,
+    optional: true,
+  },
+  'images.$': {
+    type: String,
+    optional: true,
+  },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
-/* Renders the AddStuff page for adding a document. */
 const AddListing = () => {
+  const [imagePreview, setImagePreview] = useState([]);
 
-  // On submit, insert the data.
-  const submit = (data /* , formRef */) => {
+  const handleImagePreview = (urls) => {
+    setImagePreview(urls);
+  };
+
+  const submit = async (data) => {
     const { listingTitle, price, condition, description, tags } = data;
+    let images = [];
+    if (imagePreview.length > 0) {
+      images = imagePreview; // Use the image URLs obtained from imagePreview
+    }
     const owner = Meteor.user().username;
+
     Listings.collection.insert(
-      { listingTitle, price, condition, description, tags, owner },
+      { listingTitle, price, condition, description, tags, owner, images },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -42,32 +57,34 @@ const AddListing = () => {
             // eslint-disable-next-line no-restricted-globals
             location.href = '/mylistings';
           });
-          // formRef.reset();
         }
       },
     );
   };
 
-  // Render the form. Use Uniforms: https://github.com/vazco/uniforms
-  let fRef = null;
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Create Listing</h2></Col>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+          <AutoForm schema={bridge} onSubmit={submit}>
             <Card>
               <Card.Body>
-                <Row>
-                  <Col> <TextField name="listingTitle" /> </Col>
-                  <Col> <NumField name="price" /> </Col>
-                </Row>
-                <Row>
-                  <Col> <SelectField name="condition" /> </Col>
-                  <Col> <SelectField name="tags" /></Col>
-                </Row>
+                {/* Form fields */}
+                <TextField name="listingTitle" />
+                <NumField name="price" />
+                <SelectField name="condition" />
+                <SelectField name="tags" />
                 <LongTextField name="description" />
-                <UploadFile />
+
+                {/* Image upload component */}
+                <UploadFile handleImagePreview={handleImagePreview} />
+
+                {imagePreview.map((url, index) => (
+                  <Image key={index} src={url} thumbnail />
+                ))}
+
+                {/* Submit button and error handling */}
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import Axios from 'axios';
+import PropTypes from 'prop-types';
+import CloudinaryUpload from '../services/CloudinaryUpload';
 
-const UploadFile = () => {
+const UploadFile = ({ handleImagePreview }) => {
   const [imagesSelected, setImagesSelected] = useState([]);
   const [fileNames, setFileNames] = useState([]);
 
@@ -12,33 +13,22 @@ const UploadFile = () => {
     const images = [...imagesSelected, ...selectedFiles];
 
     // Combine existing file names with the new ones
-    const names = [...fileNames, ...selectedFiles.map(file => file.name)];
+    const names = [...fileNames, ...selectedFiles.map((file) => file.name)];
 
     setImagesSelected(images);
-    console.log(imagesSelected.length);
     setFileNames(names);
   };
 
-  // add deletions to file array
-  // const handleImageDeletion = (e) => {
-  //   const selectedFiles = Array.from(e.target.files);
-  const uploadImages = () => {
-    console.log(imagesSelected);
-
-    imagesSelected.forEach((image) => {
-      console.log(image);
-      const formData = new FormData();
-      formData.append('file', image);
-      formData.append('upload_preset', 'nuzvptao');
-
-      Axios.post('https://api.cloudinary.com/v1_1/ddfut4ysa/image/upload', formData)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+  const uploadImages = async () => {
+    try {
+      const uploadedImageURLs = await Promise.all(
+        imagesSelected.map((image) => CloudinaryUpload.postImage(image)),
+      );
+      console.log(uploadedImageURLs);
+      handleImagePreview(uploadedImageURLs);
+    } catch (error) {
+      console.error('Error uploading images:', error);
+    }
   };
 
   return (
@@ -51,7 +41,7 @@ const UploadFile = () => {
         <h3>Selected Files:</h3>
         <ul>
           {fileNames.map((fileName, index) => (
-            <li key={index}>{fileName + index}</li>
+            <li key={index}>{fileName}</li>
           ))}
         </ul>
       </div>
@@ -59,4 +49,7 @@ const UploadFile = () => {
   );
 };
 
+UploadFile.propTypes = {
+  handleImagePreview: PropTypes.func.isRequired,
+};
 export default UploadFile;
