@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Card, ListGroup } from 'react-bootstrap';
 
-const UserPage = () => (
+const User_Page = () => (
   <Container className="d-flex align-items-center justify-content-center">
     <Card style={{ width: '30rem' }} className="d-flex align-items-center justify-content-center">
       <Card.Img variant="top" src="https://www.pngplay.com/wp-content/uploads/2/Patrick-Star-PNG-Background.png" style={{ width: '50%', height: 'auto' }} />
@@ -17,10 +17,10 @@ const UserPage = () => (
         <ListGroup.Item>123-456-789</ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        <Card.Link href="#">Listings</Card.Link>
-        <Card.Link href="#EditUserPage">Edit Profile</Card.Link>
+        <Card.Link href="/MyListings">Listings</Card.Link>
+        <Card.Link href="/EditUserPage">Edit Profile</Card.Link>
       </Card.Body>
     </Card>
   </Container>
 );
-export default UserPage;
+export default User_Page;

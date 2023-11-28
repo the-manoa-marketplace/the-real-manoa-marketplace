@@ -2,23 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const ListingItem = ({ listing }) => (
-  <tr>
-    <td>{listing.listingTitle}</td>
-    <td>{listing.price}</td>
-    <td>{listing.owner}</td>
-    <td>{listing.description}</td>
-    <td>{listing.condition}</td>
-    <td>{listing.tags}</td>
+  <div>
+    <p><strong>Name:</strong> {listing.listingTitle}</p>
+    <p><strong>Price:</strong> {listing.price}</p>
+    <p><strong>Owner:</strong> {listing.owner}</p>
+    <p><strong>Description:</strong> {listing.description}</p>
+    <p><strong>Condition:</strong> {listing.condition}</p>
+    <p><strong>Tags:</strong> {listing.tags}</p>
 
-    <td>
-      <Link to={`/edit/${listing._id}`}>Edit</Link>
-    </td>
-  </tr>
+    <Link to={`/edit/${listing._id}`}>Edit</Link>
+  </div>
 );
 
-// Require a document to be passed to this component.
 ListingItem.propTypes = {
   listing: PropTypes.shape({
     listingTitle: PropTypes.string,
