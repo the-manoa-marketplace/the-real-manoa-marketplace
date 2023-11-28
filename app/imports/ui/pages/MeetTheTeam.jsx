@@ -17,15 +17,12 @@ const MeetTheTeam = () => {
               fontWeight: 'bold', // Make sure this is camelCase and the value is a string
             }}
           >
-            UHMarketplace provides a centralized space that brings together students from various
-            corners of the campus, facilitating the seamless buying and selling of a wide range of
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
-            items. Whether you're looking to declutter your living space by parting with everyday
-            essentials or showcasing unique knickknacks that might pique the interest of your peers,
-            UHMarketplace stands as the optimal platform for fostering connections and transactions
-            within the student community. Join the marketplace to explore the diverse array of offerings,
-            connect with fellow students, and make the most of this dynamic exchange platform
-            tailored to meet your campus-wide trading needs.
+              Hey there! We're a bunch of Computer Science students over at the University of Hawaii
+              at Manoa. When we're not buried in homework assignments, we love hanging out and doing all sorts of fun
+              things together. One of our favorite hobbies? Drinking our pain away... Just kidding! Creating awesome
+              websites for awesome people, just like you! If you dig what we've built, you'll probably dig us too.
+              We're just a laid-back crew that enjoys blending tech skills with a cool, collaborative vibe.
+              Looking forward to connecting with you!
           </p>
         </Col>
       </Row>
