@@ -68,6 +68,17 @@ button, input, select, textarea {
   margin-right: 0;
 }
 
+footer {
+  margin-top: auto;
+  padding: 20px;
+}
+
+.slash {
+  font-size: 30px;
+  color: black;
+  margin: 0 10px;
+}
+
 /* Modernizing form elements */
 input[type=text], input[type=password], input[type=email], select, textarea {
   border: 1px solid #ddd;
