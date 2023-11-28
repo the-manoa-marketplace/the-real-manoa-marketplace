@@ -46,7 +46,19 @@ body::after {
 .custom-img {
   height: 50px;
 }
+
 .no-left-margin {
   margin-left: 0;
   margin-right: 0;
+}
+
+footer {
+  margin-top: auto;
+  padding: 20px;
+}
+
+.slash {
+  font-size: 30px;
+  color: black;
+  margin: 0 10px;
 }
