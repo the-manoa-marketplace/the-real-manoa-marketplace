@@ -38,6 +38,7 @@ class ListingsCollection {
     // Define names for publications and subscriptions
     this.userPublicationName = `${this.name}.publication.user`;
     this.adminPublicationName = `${this.name}.publication.admin`;
+    this.listingPublicationName = `${this.name}.publication.listing`;
   }
 }
 
