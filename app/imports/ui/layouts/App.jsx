@@ -17,7 +17,6 @@ import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import UserPage from '../pages/UserPage';
-import AddProfile from '../pages/AddProfile';
 import MyListings from '../pages/MyListings';
 import ItemsForSale from '../pages/ItemsForSale';
 import EditUserPage from '../pages/EditUserPage';

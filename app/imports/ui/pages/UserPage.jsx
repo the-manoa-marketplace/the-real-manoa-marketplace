@@ -3,10 +3,10 @@ import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from '../components/LoadingSpinner';
+import UserProfile from '../components/Profile';
 import { Profiles } from '../../api/Profile/Profiles';
-import Profile from '../components/Profile';
 
-/* Renders a table containing all of the Profile documents. Use <StuffItem> to render each row. */
+/* Renders a table containing all the Profile documents. Use <StuffItem> to render each row. */
 const UserPage = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, profiles } = useTracker(() => {
@@ -32,7 +32,7 @@ const UserPage = () => {
               <h2>Your Profile</h2>
             </Col>
             <Row xs={1} md={2} lg={3} className="g-4">
-              {profiles.map((profile, index) => (<Col key={index}><Profile profile={profile} /></Col>))}
+              {profiles.map((profile, index) => (<Col key={index}><UserProfile profile={profile} /></Col>))}
             </Row>
           </Col>
         </Row>
