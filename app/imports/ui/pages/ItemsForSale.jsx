@@ -5,6 +5,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Listings } from '../../api/listing/Listing';
 import ListingItem from '../components/ListingItem';
 import LoadingSpinner from '../components/LoadingSpinner';
+import SideBar from '../components/SideBar';
 
 const ItemsForSale = () => {
   const { ready, listings } = useTracker(() => {
@@ -20,6 +21,9 @@ const ItemsForSale = () => {
   return ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
+        <Col xs={3}>
+          <SideBar />
+        </Col>
         <Col md={8}>
           <Col className="text-center">
             <h2>Items For Sale</h2>
