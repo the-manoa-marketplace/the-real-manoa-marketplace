@@ -11,11 +11,11 @@ html, body {
 }
 
 body {
-  font-family: var(--primary-font);
-  --bs-light-rgb: var(--main-bg-color-rgb);
-  background: #F4F7F6 !important; /* This is a hex code for a teal color */
-  margin: 0;
+  --bs-light-rgb: var(--matr-navbar-bg-rgb);
+  background: fixed center url("images/realB.png");
+  background-size: cover;
 }
+
 
 .customfooter {
   background-color: #ededed;
