@@ -7,6 +7,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Listings } from '../../api/listing/Listing';
 import UploadFile from '../components/UploadFile.jsx';
+import CloudinaryUpload from '../services/CloudinaryUpload';
 
 const formSchema = new SimpleSchema({
   listingTitle: String,
@@ -33,17 +34,24 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 const AddListing = () => {
-  const [imagePreview, setImagePreview] = useState([]);
+  const [imagesSelected, setImagesSelected] = useState([]);
 
-  const handleImagePreview = (urls) => {
-    setImagePreview(urls);
+  const handleImagePreview = (selectedFiles) => {
+    setImagesSelected(selectedFiles);
   };
 
   const submit = async (data) => {
     const { listingTitle, price, condition, description, tags } = data;
     let images = [];
-    if (imagePreview.length > 0) {
-      images = imagePreview; // Use the image URLs obtained from imagePreview
+    console.log('this is being ran 1');
+    if (imagesSelected.length > 0) {
+      console.log('this is being ran 2');
+      console.log(imagesSelected.length);
+      images = await Promise.all(
+        imagesSelected.map((image) => CloudinaryUpload.postImage(image)),
+        console.log('this is being ran 3'),
+      );
+      console.log('uploaded images: ,', images);
     }
     const owner = Meteor.user().username;
 
@@ -80,8 +88,8 @@ const AddListing = () => {
                 {/* Image upload component */}
                 <UploadFile handleImagePreview={handleImagePreview} />
 
-                {imagePreview.map((url, index) => (
-                  <Image key={index} src={url} thumbnail />
+                {imagesSelected.map((url, index) => (
+                  <Image key={index} src={URL.createObjectURL(url)} thumbnail />
                 ))}
 
                 {/* Submit button and error handling */}
