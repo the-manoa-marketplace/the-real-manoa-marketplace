@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Listings } from '../../api/listing/Listing.js';
-import {Profiles} from "../../api/Profile/Profiles";
+import { Profiles } from '../../api/Profile/Profiles';
 
 /* eslint-disable no-console */
 
@@ -8,6 +8,11 @@ import {Profiles} from "../../api/Profile/Profiles";
 const addListing = (listing) => {
   console.log(`  Adding: ${listing.name} (${listing.owner})`);
   Listings.collection.insert(listing);
+};
+
+const addProfiles = (profile) => {
+  console.log(`  Adding: ${profile.firstName} (${profile.owner})`);
+  Profiles.collection.insert(profile);
 };
 
 // Initialize the StuffsCollection if empty.

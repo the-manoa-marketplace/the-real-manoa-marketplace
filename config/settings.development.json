@@ -4,7 +4,7 @@
     { "email": "john@foo.com", "password": "changeme" },
     { "email": "bunder@hawaii.edu", "password": "changeme", "role": "admin"},
     { "email": "rstagen@hawaii.edu", "password": "changeme", "role": "admin"},
-    { "email": "zstoddard@hawaii.edu", "password": "changeme", "role": "admin"},
+    { "email": "zstoddar@hawaii.edu", "password": "changeme", "role": "admin"},
     { "email": "mposey@hawaii.edu", "password": "changeme", "role": "admin"},
     { "email": "ei4@hawaii.edu", "password": "changeme", "role": "admin"}
   ],

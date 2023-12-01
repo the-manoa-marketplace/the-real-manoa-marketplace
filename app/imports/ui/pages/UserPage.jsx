@@ -19,24 +19,24 @@ const UserPage = () => {
     // Get the Profile documents
     const profileItems = Profiles.collection.find({}).fetch();
     return {
-      contacts: profileItems,
+      profiles: profileItems,
       ready: rdy,
     };
   }, []);
 
   return (ready ? (
-      <Container className="py-3">
-        <Row className="justify-content-center">
-          <Col md={7}>
-            <Col className="text-center">
-              <h2>Your Profile</h2>
-            </Col>
-            <Row xs={1} md={2} lg={3} className="g-4">
-              {profiles.map((profile, index) => (<Col key={index}><UserProfile profile={profile} /></Col>))}
-            </Row>
+    <Container className="py-3">
+      <Row className="justify-content-center">
+        <Col md={7}>
+          <Col className="text-center">
+            <h2>Your Profile</h2>
           </Col>
-        </Row>
-      </Container>
+          <Row xs={1} md={2} lg={3} className="g-4">
+            {profiles.map((profile, index) => (<Col key={index}><UserProfile profile={profile} /></Col>))}
+          </Row>
+        </Col>
+      </Row>
+    </Container>
   ) : <LoadingSpinner />);
 };
 
