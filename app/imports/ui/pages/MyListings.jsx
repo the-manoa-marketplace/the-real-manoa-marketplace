@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Listings } from '../../api/listing/Listing';
 import ListingItem from '../components/ListingItem';
@@ -41,7 +41,11 @@ const MyListings = () => {
               <Row>
                 {listings.map((listing) => (
                   <Col key={listing._id} md={4} className="mb-4">
-                    <ListingItem listing={listing} />
+                    <Card>
+                      <Card.Body>
+                        <ListingItem listing={listing} />
+                      </Card.Body>
+                    </Card>
                   </Col>
                 ))}
               </Row>
