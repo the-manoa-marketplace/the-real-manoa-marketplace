@@ -6,8 +6,7 @@ import { Image, Carousel } from 'react-bootstrap';
 const ListingItem = ({ listing }) => (
   <div>
     <p><strong>Name:</strong> {listing.listingTitle}</p>
-    <p><strong>Price:</strong> {listing.price}</p>
-    <p><strong>Owner:</strong> {listing.owner}</p>
+    <p><strong>Price:</strong> ${listing.price}</p>
     <p><strong>Description:</strong> {listing.description}</p>
     <p><strong>Condition:</strong> {listing.condition}</p>
     <p><strong>Tags:</strong> {listing.tags}</p>

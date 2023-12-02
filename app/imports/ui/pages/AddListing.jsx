@@ -11,7 +11,10 @@ import CloudinaryUpload from '../services/CloudinaryUpload';
 
 const formSchema = new SimpleSchema({
   listingTitle: String,
-  price: Number,
+  price: {
+    type: Number,
+    min: 0,
+  },
   condition: {
     type: String,
     allowedValues: ['Factory New', 'Like New', 'Fair', 'Field-Tested'],
