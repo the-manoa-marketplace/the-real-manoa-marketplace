@@ -5,13 +5,6 @@ import { Image, Carousel } from 'react-bootstrap';
 
 const ListingItem = ({ listing }) => (
   <div>
-    <p><strong>Name:</strong> {listing.listingTitle}</p>
-    <p><strong>Price:</strong> {listing.price}</p>
-    <p><strong>Owner:</strong> {listing.owner}</p>
-    <p><strong>Description:</strong> {listing.description}</p>
-    <p><strong>Condition:</strong> {listing.condition}</p>
-    <p><strong>Tags:</strong> {listing.tags}</p>
-    <p><strong>Images:</strong></p>
     {listing.images && listing.images.length > 0 ? (
       <Carousel
         nextIcon={<span aria-hidden="true" className="carousel-control-next-icon" style={{ filter: 'invert(1)' }} />}
@@ -26,6 +19,14 @@ const ListingItem = ({ listing }) => (
     ) : (
       <Image src="https://res.cloudinary.com/ddfut4ysa/image/upload/v1701156762/syn00xfrluhatga6s08e.jpg" thumbnail />
     )}
+    <p><strong>Name:</strong> {listing.listingTitle}</p>
+    <p><strong>Price:</strong> {listing.price}</p>
+    <p><strong>Owner:</strong> {listing.owner}</p>
+    <p><strong>Description:</strong> {listing.description}</p>
+    <p><strong>Condition:</strong> {listing.condition}</p>
+    <p><strong>Tags:</strong> {listing.tags}</p>
+    <p><strong>Images:</strong></p>
+
     <Link to={`/edit/${listing._id}`}>Edit</Link>
   </div>
 );
