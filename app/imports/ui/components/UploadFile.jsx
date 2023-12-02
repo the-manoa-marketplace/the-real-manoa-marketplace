@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Image } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 const UploadFile = ({ handleImagePreview }) => {
