@@ -21,6 +21,10 @@ Meteor.publish(Profiles.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish('allListings', function () {
+  return Listings.collection.find();
+});
+
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise, publish nothing.
 Meteor.publish(Listings.adminPublicationName, function () {
