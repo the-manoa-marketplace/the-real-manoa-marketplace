@@ -26,45 +26,45 @@ const AddProfile = () => {
     const { firstName, lastName, address, image, description } = data;
     const owner = Meteor.user().username;
     Profiles.collection.insert(
-        { firstName, lastName, address, image, description, owner },
-        (error) => {
-          if (error) {
-            swal('Error', error.message, 'error');
-          } else {
-            swal('Success', 'Item added successfully', 'success');
-            formRef.reset();
-          }
-        },
+      { firstName, lastName, address, image, description, owner },
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Item added successfully', 'success');
+          formRef.reset();
+        }
+      },
     );
   };
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
-      <Container className="py-3">
-        <Row className="justify-content-center">
-          <Col xs={10}>
-            <Col className="text-center"><h2>Make a Profile</h2></Col>
-            <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
-              <Card>
-                <Card.Body>
-                  <Row>
-                    <Col><TextField name="firstName" /></Col>
-                    <Col><TextField name="lastName" /></Col>
-                  </Row>
-                  <Row>
-                    <Col><TextField name="address" /></Col>
-                    <Col><TextField name="image" /></Col>
-                  </Row>
-                  <LongTextField name="description" />
-                  <SubmitField />
-                  <ErrorsField />
-                </Card.Body>
-              </Card>
-            </AutoForm>
-          </Col>
-        </Row>
-      </Container>
+    <Container className="py-3">
+      <Row className="justify-content-center">
+        <Col xs={10}>
+          <Col className="text-center"><h2>Make a Profile</h2></Col>
+          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+            <Card>
+              <Card.Body>
+                <Row>
+                  <Col><TextField name="firstName" /></Col>
+                  <Col><TextField name="lastName" /></Col>
+                </Row>
+                <Row>
+                  <Col><TextField name="address" /></Col>
+                  <Col><TextField name="image" /></Col>
+                </Row>
+                <LongTextField name="description" />
+                <SubmitField />
+                <ErrorsField />
+              </Card.Body>
+            </Card>
+          </AutoForm>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
