@@ -19,7 +19,10 @@ const formSchema = new SimpleSchema({
     type: String,
     allowedValues: ['Factory New', 'Like New', 'Fair', 'Field-Tested'],
   },
-  description: String,
+  description: {
+    type: String,
+    max: 500, // Set a maximum character limit
+  },
   tags: {
     type: String,
     allowedValues: ['Apparel', 'Housewares', 'Vehicle', 'Electronics', 'Games', 'Other'],
