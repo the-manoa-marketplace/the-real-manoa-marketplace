@@ -1,4 +1,4 @@
-name: the-real-manoa-marketplace
+name: ci-the-real-manoa-marketplace
 
 on:
   push:
