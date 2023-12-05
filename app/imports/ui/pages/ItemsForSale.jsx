@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import ListItem from '../components/ListingItem';
+import { Listings } from '../../api/listing/Listing';
+import ListingItem from '../components/ListingItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import SideBar from '../components/SideBar';
-import { Listings } from '../../api/listing/Listing';
-import ListingModal from '../components/ListingModal';
+import ReportModal from '../components/ReportModal'; // Import the ReportModal component
 
 const ItemsForSale = () => {
   const [selectedFilter, setSelectedFilter] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedListing, setSelectedListing] = useState(null);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const { ready, listings } = useTracker(() => {
     const subscription = Meteor.subscribe('allListings');
     const rdy = subscription.ready();
 
     const filterCondition = selectedFilter ? { tags: selectedFilter } : {};
-
     const listingItems = Listings.collection.find(filterCondition).fetch();
     return {
       listings: listingItems,
@@ -26,14 +25,13 @@ const ItemsForSale = () => {
     };
   }, [selectedFilter]);
 
-  const handleShowModal = (listing) => {
-    setSelectedListing(listing);
-    setShowModal(true);
+  const handleReportClick = (item) => {
+    setSelectedItem(item);
+    setShowReportModal(true);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setSelectedListing(null);
+  const handleCloseReportModal = () => {
+    setShowReportModal(false);
   };
 
   return ready ? (
@@ -43,21 +41,26 @@ const ItemsForSale = () => {
           <SideBar onFilterChange={setSelectedFilter} />
         </Col>
         <Col md={8}>
-          <Col className="text-center ml-2">
-            <h2>Items For Sale</h2>
-          </Col>
-          <Row xs={1} md={3} className="g-4">
+          <Row>
             {listings.map((listing) => (
-              <Col key={listing._id} className="mb-4">
-                <ListItem listing={listing} onClick={() => handleShowModal(listing)} key={listing._id} />
+              <Col key={listing._id} md={4} className="mb-4">
+                <Card>
+                  <Card.Body>
+                    <ListingItem listing={listing} onReportClick={handleReportClick} />
+                  </Card.Body>
+                </Card>
               </Col>
             ))}
           </Row>
         </Col>
       </Row>
-
-      {/* Render the modal component */}
-      <ListingModal showModal={showModal} handleClose={handleCloseModal} listing={selectedListing} />
+      {selectedItem && (
+        <ReportModal
+          show={showReportModal}
+          handleClose={handleCloseReportModal}
+          item={selectedItem}
+        />
+      )}
     </Container>
   ) : (
     <LoadingSpinner />

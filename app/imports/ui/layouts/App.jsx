@@ -24,6 +24,7 @@ import ContactUs from '../pages/ContactUs';
 import TermsOfService from '../pages/TermsOfService';
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import MeetTheTeam from '../pages/MeetTheTeam';
+import AdminReports from '../pages/AdminReport';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -57,6 +58,7 @@ const App = () => {
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/admin-reports" element={<AdminProtectedRoute ready={ready}><AdminReports /></AdminProtectedRoute>} />
         </Routes>
         <Footer />
       </div>
