@@ -49,6 +49,7 @@ ItemRemoveModal.propTypes = {
     itemName: PropTypes.string,
     itemId: PropTypes.string,
     _id: PropTypes.string,
+    reportingUser: PropTypes.string,
   }).isRequired,
 };
 

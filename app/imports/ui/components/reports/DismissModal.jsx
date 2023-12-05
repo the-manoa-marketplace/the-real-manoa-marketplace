@@ -32,6 +32,7 @@ DismissModal.propTypes = {
   report: PropTypes.shape({
     itemName: PropTypes.string,
     _id: PropTypes.string,
+    reportingUser: PropTypes.string,
   }).isRequired,
 };
 

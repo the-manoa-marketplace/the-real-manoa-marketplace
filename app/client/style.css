@@ -100,3 +100,9 @@ button, .btn {
 button:hover, .btn:hover {
   background-color: #003d82;
 }
+
+.card {
+  min-height: 100%;  /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
+}
