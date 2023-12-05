@@ -8,7 +8,6 @@ import { AutoForm, ErrorsField, LongTextField, SubmitField } from 'uniforms-boot
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 
-
 const formSchema = new SimpleSchema({
   report: String,
 });
