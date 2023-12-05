@@ -1,29 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Image, Carousel } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import ListingModal from './ListingModal'; // Import the new component
 
-const ListingItem = ({ listing }) => (
-  <div>
-    {listing.images && listing.images.length > 0 ? (
-      <Carousel
-        nextIcon={<span aria-hidden="true" className="carousel-control-next-icon" style={{ filter: 'invert(1)' }} />}
-        prevIcon={<span aria-hidden="true" className="carousel-control-prev-icon" style={{ filter: 'invert(1)' }} />}
+const ListItem = ({ listing }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShow = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
+
+  // Ensure the div is focusable and handle keyboard events
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      // Trigger the modal on Enter or Space key press
+      handleShow();
+    }
+  };
+
+  return (
+    <>
+      <Card
+        style={{ border: '1px solid #ccc', marginBottom: '15px' }}
+        tabIndex="0" // Make the div focusable
+        role="button"
+        onClick={handleShow}
+        onKeyDown={handleKeyDown}
       >
-        {listing.images.map((url, index) => (
-          <Carousel.Item key={index}>
-            <Image src={url} style={{ width: '100%' }} thumbnail />
-          </Carousel.Item>
-        ))}
-      </Carousel>
-    ) : (
-      <Image src="https://res.cloudinary.com/ddfut4ysa/image/upload/v1701156762/syn00xfrluhatga6s08e.jpg" thumbnail />
-    )}
-    <p><strong>Name:</strong> {listing.listingTitle}</p>
-    <p><strong>Price:</strong> ${listing.price}</p>
-  </div>
-);
+        <Card.Body>
+          <img
+            src={
+              listing.images && listing.images.length > 0
+                ? listing.images[0]
+                : 'https://res.cloudinary.com/ddfut4ysa/image/upload/v1701156762/syn00xfrluhatga6s08e.jpg'
+            }
+            alt={listing.listingTitle}
+            style={{ width: '100%', cursor: 'pointer' }}
+          />
+          <Card.Title>{listing.listingTitle}</Card.Title>
+          <Card.Text>
+            <strong>Price:</strong> ${listing.price}
+          </Card.Text>
+        </Card.Body>
+      </Card>
 
-ListingItem.propTypes = {
+      {/* Render the modal component */}
+      <ListingModal
+        showModal={showModal}
+        handleClose={handleClose}
+        listing={listing}
+      />
+    </>
+  );
+};
+
+ListItem.propTypes = {
   listing: PropTypes.shape({
     listingTitle: PropTypes.string,
     price: PropTypes.number,
@@ -36,4 +66,4 @@ ListingItem.propTypes = {
   }).isRequired,
 };
 
-export default ListingItem;
+export default ListItem;

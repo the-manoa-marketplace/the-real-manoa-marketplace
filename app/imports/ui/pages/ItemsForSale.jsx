@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Listings } from '../../api/listing/Listing';
-import ListingItem from '../components/ListingItem';
+import ListItem from '../components/ListingItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import SideBar from '../components/SideBar';
+import { Listings } from '../../api/listing/Listing';
+import ListingModal from '../components/ListingModal';
 
 const ItemsForSale = () => {
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedListing, setSelectedListing] = useState(null);
 
   const { ready, listings } = useTracker(() => {
     const subscription = Meteor.subscribe('allListings');
     const rdy = subscription.ready();
 
-    // Use conditional to determine whether to filter based on selectedFilter
     const filterCondition = selectedFilter ? { tags: selectedFilter } : {};
 
     const listingItems = Listings.collection.find(filterCondition).fetch();
@@ -23,6 +25,16 @@ const ItemsForSale = () => {
       ready: rdy,
     };
   }, [selectedFilter]);
+
+  const handleShowModal = (listing) => {
+    setSelectedListing(listing);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedListing(null);
+  };
 
   return ready ? (
     <Container className="py-3">
@@ -34,19 +46,18 @@ const ItemsForSale = () => {
           <Col className="text-center ml-2">
             <h2>Items For Sale</h2>
           </Col>
-          <Row>
+          <Row xs={1} md={3} className="g-4">
             {listings.map((listing) => (
-              <Col key={listing._id} md={4} className="mb-4">
-                <Card>
-                  <Card.Body>
-                    <ListingItem listing={listing} />
-                  </Card.Body>
-                </Card>
+              <Col key={listing._id} className="mb-4">
+                <ListItem listing={listing} onClick={() => handleShowModal(listing)} key={listing._id} />
               </Col>
             ))}
           </Row>
         </Col>
       </Row>
+
+      {/* Render the modal component */}
+      <ListingModal showModal={showModal} handleClose={handleCloseModal} listing={selectedListing} />
     </Container>
   ) : (
     <LoadingSpinner />
