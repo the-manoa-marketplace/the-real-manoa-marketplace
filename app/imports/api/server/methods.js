@@ -1,10 +1,9 @@
-// server/methods.js
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Reports } from 'reports/Reports';
+import { Reports } from '../reports/Reports';
 
 Meteor.methods({
-  'ReportsCollection.insert'(reportData) {
+  'ReportsCollectionInsert'(reportData) {
     check(reportData, {
       report: String,
       itemName: String,

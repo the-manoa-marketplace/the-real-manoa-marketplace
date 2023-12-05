@@ -8,6 +8,7 @@ import { AutoForm, ErrorsField, LongTextField, SubmitField } from 'uniforms-boot
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 
+
 const formSchema = new SimpleSchema({
   report: String,
 });
@@ -27,15 +28,15 @@ const ReportModal = ({ show, handleClose, item }) => {
       createdAt: new Date(),
       closed: false,
     };
-
-    // Call to Meteor's server method
-    Meteor.call('ReportsCollection.insert', reportData, (error) => {
+    console.log(reportData);
+    Meteor.call('ReportsCollectionInsert', reportData, (error) => {
       if (error) {
-        swal('Error', error.reason, 'error');
+        swal('Error', error.message, 'error');
       } else {
-        swal('Success', 'Report has been submitted', 'success');
-        formRef.current.reset();
-        handleClose();
+        swal('Success', 'Report has been submitted', 'success').then(() => {
+          formRef.current.reset();
+          handleClose();
+        });
       }
     });
   };

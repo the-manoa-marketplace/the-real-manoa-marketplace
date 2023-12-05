@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Listings } from '../../api/listing/Listing.js';
 import { Profiles } from '../../api/Profile/Profiles';
-
+import '../../api/server/methods.js';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.

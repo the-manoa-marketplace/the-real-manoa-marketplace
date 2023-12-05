@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Listings } from '../../api/listing/Listing';
 import { Profiles } from '../../api/Profile/Profiles';
+import { Reports } from '../../api/reports/Reports';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
@@ -30,6 +31,12 @@ Meteor.publish('allListings', function () {
 Meteor.publish(Listings.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Listings.collection.find();
+  }
+  return this.ready();
+});
+Meteor.publish(Reports.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Reports.collection.find();
   }
   return this.ready();
 });
