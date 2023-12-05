@@ -1,9 +1,10 @@
+// ListingItem.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, Carousel } from 'react-bootstrap';
+import { Image, Carousel, Button, Card } from 'react-bootstrap';
 
-const ListingItem = ({ listing }) => (
-  <div>
+const ListingItem = ({ listing, onReportClick }) => (
+  <Card>
     {listing.images && listing.images.length > 0 ? (
       <Carousel
         nextIcon={<span aria-hidden="true" className="carousel-control-next-icon" style={{ filter: 'invert(1)' }} />}
@@ -18,22 +19,22 @@ const ListingItem = ({ listing }) => (
     ) : (
       <Image src="https://res.cloudinary.com/ddfut4ysa/image/upload/v1701156762/syn00xfrluhatga6s08e.jpg" thumbnail />
     )}
-    <p><strong>Name:</strong> {listing.listingTitle}</p>
-    <p><strong>Price:</strong> ${listing.price}</p>
-  </div>
+    <Card.Body>
+      <Card.Title>{listing.listingTitle}</Card.Title>
+      <Card.Text><strong>Price:</strong> ${listing.price}</Card.Text>
+      <Button variant="outline-danger" onClick={() => onReportClick(listing)}>Report</Button>
+    </Card.Body>
+  </Card>
 );
 
 ListingItem.propTypes = {
   listing: PropTypes.shape({
     listingTitle: PropTypes.string,
     price: PropTypes.number,
-    condition: PropTypes.string,
-    owner: PropTypes.string,
-    description: PropTypes.string,
-    tags: PropTypes.string,
-    _id: PropTypes.string,
     images: PropTypes.arrayOf(PropTypes.string),
+    _id: PropTypes.string,
   }).isRequired,
+  onReportClick: PropTypes.func.isRequired,
 };
 
 export default ListingItem;

@@ -6,23 +6,33 @@ import { Listings } from '../../api/listing/Listing';
 import ListingItem from '../components/ListingItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import SideBar from '../components/SideBar';
+import ReportModal from '../components/ReportModal'; // Import the ReportModal component
 
 const ItemsForSale = () => {
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const { ready, listings } = useTracker(() => {
     const subscription = Meteor.subscribe('allListings');
     const rdy = subscription.ready();
 
-    // Use conditional to determine whether to filter based on selectedFilter
     const filterCondition = selectedFilter ? { tags: selectedFilter } : {};
-
     const listingItems = Listings.collection.find(filterCondition).fetch();
     return {
       listings: listingItems,
       ready: rdy,
     };
   }, [selectedFilter]);
+
+  const handleReportClick = (item) => {
+    setSelectedItem(item);
+    setShowReportModal(true);
+  };
+
+  const handleCloseReportModal = () => {
+    setShowReportModal(false);
+  };
 
   return ready ? (
     <Container className="py-3">
@@ -31,15 +41,12 @@ const ItemsForSale = () => {
           <SideBar onFilterChange={setSelectedFilter} />
         </Col>
         <Col md={8}>
-          <Col className="text-center ml-2">
-            <h2>Items For Sale</h2>
-          </Col>
           <Row>
             {listings.map((listing) => (
               <Col key={listing._id} md={4} className="mb-4">
                 <Card>
                   <Card.Body>
-                    <ListingItem listing={listing} />
+                    <ListingItem listing={listing} onReportClick={handleReportClick} />
                   </Card.Body>
                 </Card>
               </Col>
@@ -47,6 +54,13 @@ const ItemsForSale = () => {
           </Row>
         </Col>
       </Row>
+      {selectedItem && (
+        <ReportModal
+          show={showReportModal}
+          handleClose={handleCloseReportModal}
+          item={selectedItem}
+        />
+      )}
     </Container>
   ) : (
     <LoadingSpinner />
