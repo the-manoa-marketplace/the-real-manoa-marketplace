@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
+import { Link } from 'react-router-dom';
 import ListItem from '../components/ListingItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Listings } from '../../api/listing/Listing';
 import ListingModal from '../components/ListingModal';
-import SideBar from '../components/SideBar'; // Import the SideBar component
+import SideBar from '../components/SideBar';
 
 const MyListings = () => {
   const [selectedFilter, setSelectedFilter] = useState(null);
@@ -43,6 +44,7 @@ const MyListings = () => {
         <Col xs={3}>
           <SideBar onFilterChange={setSelectedFilter} />
         </Col>
+        {/* Content */}
         <Col xs={9} className="py-3">
           <Row className="justify-content-center">
             <Col md={8}>
@@ -52,11 +54,16 @@ const MyListings = () => {
               <Row>
                 {listings.map((listing) => (
                   <Col key={listing._id} md={4} className="mb-4">
-                    <ListItem
-                      listing={listing}
-                      showEditLink
-                      onClick={() => handleShowModal(listing)}
-                    />
+                    <Card>
+                      <Card.Body>
+                        <ListItem
+                          listing={listing}
+                          showEditLink
+                          onClick={() => handleShowModal(listing)}
+                        />
+                      </Card.Body>
+                      <Link to={`/edit/${listing._id}`}>Edit</Link>
+                    </Card>
                   </Col>
                 ))}
               </Row>

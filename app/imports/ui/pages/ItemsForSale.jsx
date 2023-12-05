@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Listings } from '../../api/listing/Listing';
-import ListingItem from '../components/ListingItem';
+import ListItem from '../components/ListingItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import SideBar from '../components/SideBar';
+import ListingModal from '../components/ListingModal';
 import ReportModal from '../components/ReportModal'; // Import the ReportModal component
+import { Listings } from '../../api/listing/Listing';
 
 const ItemsForSale = () => {
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedListing, setSelectedListing] = useState(null);
   const [showReportModal, setShowReportModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -24,6 +27,16 @@ const ItemsForSale = () => {
       ready: rdy,
     };
   }, [selectedFilter]);
+
+  const handleShowModal = (listing) => {
+    setSelectedListing(listing);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedListing(null);
+  };
 
   const handleReportClick = (item) => {
     setSelectedItem(item);
@@ -41,12 +54,16 @@ const ItemsForSale = () => {
           <SideBar onFilterChange={setSelectedFilter} />
         </Col>
         <Col md={8}>
-          <Row>
+          <Row xs={1} md={3} className="g-4">
             {listings.map((listing) => (
-              <Col key={listing._id} md={4} className="mb-4">
+              <Col key={listing._id} className="mb-4">
                 <Card>
                   <Card.Body>
-                    <ListingItem listing={listing} onReportClick={handleReportClick} />
+                    <ListItem
+                      listing={listing}
+                      onClick={() => handleShowModal(listing)}
+                      onReportClick={() => handleReportClick(listing)}
+                    />
                   </Card.Body>
                 </Card>
               </Col>
@@ -54,6 +71,15 @@ const ItemsForSale = () => {
           </Row>
         </Col>
       </Row>
+
+      {/* Render the modals */}
+      {selectedListing && (
+        <ListingModal
+          showModal={showModal}
+          handleClose={handleCloseModal}
+          listing={selectedListing}
+        />
+      )}
       {selectedItem && (
         <ReportModal
           show={showReportModal}
