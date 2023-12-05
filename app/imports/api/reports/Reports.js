@@ -1,7 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
-
 /**
  * The ItemsCollection. It encapsulates state and variable values for items.
  */
@@ -27,5 +26,4 @@ class ReportsCollection {
     this.adminPublicationName = `${this.name}.publication.admin`;
   }
 }
-
 export const Reports = new ReportsCollection();
