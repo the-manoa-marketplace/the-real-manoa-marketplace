@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
+import { Link } from 'react-router-dom';
 import { Listings } from '../../api/listing/Listing';
 import ListingItem from '../components/ListingItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import SideBar from '../components/SideBar';
-import { Link } from 'react-router-dom';
 
 const MyListings = () => {
   const [selectedFilter, setSelectedFilter] = useState(null);
