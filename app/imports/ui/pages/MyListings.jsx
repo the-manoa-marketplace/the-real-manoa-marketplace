@@ -6,6 +6,7 @@ import { Listings } from '../../api/listing/Listing';
 import ListingItem from '../components/ListingItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import SideBar from '../components/SideBar';
+import { Link } from 'react-router-dom';
 
 const MyListings = () => {
   const [selectedFilter, setSelectedFilter] = useState(null);
@@ -45,6 +46,7 @@ const MyListings = () => {
                       <Card.Body>
                         <ListingItem listing={listing} />
                       </Card.Body>
+                      <Link to={`/edit/${listing._id}`}>Edit</Link>
                     </Card>
                   </Col>
                 ))}
