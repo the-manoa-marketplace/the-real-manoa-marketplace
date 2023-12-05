@@ -3,19 +3,21 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Link } from 'react-router-dom';
-import { Listings } from '../../api/listing/Listing';
-import ListingItem from '../components/ListingItem';
+import ListItem from '../components/ListingItem';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { Listings } from '../../api/listing/Listing';
+import ListingModal from '../components/ListingModal';
 import SideBar from '../components/SideBar';
 
 const MyListings = () => {
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedListing, setSelectedListing] = useState(null);
 
   const { ready, listings } = useTracker(() => {
     const subscription = Meteor.subscribe(Listings.userPublicationName);
     const rdy = subscription.ready();
 
-    // Use conditional to determine whether to filter based on selectedFilter
     const filterCondition = selectedFilter ? { tags: selectedFilter } : {};
 
     const listingItems = Listings.collection.find(filterCondition).fetch();
@@ -24,6 +26,16 @@ const MyListings = () => {
       ready: rdy,
     };
   }, [selectedFilter]);
+
+  const handleShowModal = (listing) => {
+    setSelectedListing(listing);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedListing(null);
+  };
 
   return ready ? (
     <Container fluid>
@@ -44,7 +56,11 @@ const MyListings = () => {
                   <Col key={listing._id} md={4} className="mb-4">
                     <Card>
                       <Card.Body>
-                        <ListingItem listing={listing} />
+                        <ListItem
+                          listing={listing}
+                          showEditLink
+                          onClick={() => handleShowModal(listing)}
+                        />
                       </Card.Body>
                       <Link to={`/edit/${listing._id}`}>Edit</Link>
                     </Card>
@@ -55,6 +71,9 @@ const MyListings = () => {
           </Row>
         </Col>
       </Row>
+
+      {/* Render the modal component */}
+      <ListingModal showModal={showModal} handleClose={handleCloseModal} listing={selectedListing} />
     </Container>
   ) : (
     <LoadingSpinner />
