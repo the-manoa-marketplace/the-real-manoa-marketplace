@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
-import ListingModal from './ListingModal'; // Import the new component
+import ListingModal from './ListingModal';
 
-const ListItem = ({ listing }) => {
+const ListItem = ({ listing, onReportClick }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleShow = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
 
-  // Ensure the div is focusable and handle keyboard events
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
-      // Trigger the modal on Enter or Space key press
       handleShow();
     }
   };
@@ -21,7 +19,7 @@ const ListItem = ({ listing }) => {
     <>
       <Card
         style={{ border: '1px solid #ccc', marginBottom: '15px' }}
-        tabIndex="0" // Make the div focusable
+        tabIndex="0"
         role="button"
         onClick={handleShow}
         onKeyDown={handleKeyDown}
@@ -43,11 +41,11 @@ const ListItem = ({ listing }) => {
         </Card.Body>
       </Card>
 
-      {/* Render the modal component */}
       <ListingModal
         showModal={showModal}
         handleClose={handleClose}
         listing={listing}
+        onReportClick={onReportClick}
       />
     </>
   );
@@ -57,13 +55,9 @@ ListItem.propTypes = {
   listing: PropTypes.shape({
     listingTitle: PropTypes.string,
     price: PropTypes.number,
-    condition: PropTypes.string,
-    owner: PropTypes.string,
-    description: PropTypes.string,
-    tags: PropTypes.string,
-    _id: PropTypes.string,
     images: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
+  onReportClick: PropTypes.func.isRequired,
 };
 
 export default ListItem;

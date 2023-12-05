@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Image, Carousel } from 'react-bootstrap';
+import { Modal, Image, Carousel, Button } from 'react-bootstrap';
 
-const ListingModal = ({ showModal, handleClose, listing }) => (
+const ListingModal = ({ showModal, handleClose, listing, onReportClick }) => (
   <Modal show={showModal} onHide={handleClose} size="lg">
     <Modal.Header closeButton>
       <Modal.Title>Listing Details</Modal.Title>
@@ -28,18 +28,11 @@ const ListingModal = ({ showModal, handleClose, listing }) => (
       <p>
         <strong>Price:</strong> ${listing?.price || 'N/A'}
       </p>
-      <p>
-        <strong>Condition:</strong> {listing?.condition || 'N/A'}
-      </p>
-      <p>
-        <strong>Owner:</strong> {listing?.owner || 'N/A'}
-      </p>
-      <p>
-        <strong>Description:</strong> {listing?.description || 'N/A'}
-      </p>
       {/* Add other details as needed */}
+      <Button variant="danger" onClick={onReportClick}>
+        Report
+      </Button>
     </Modal.Body>
-    {/* ... (existing code) */}
   </Modal>
 );
 
@@ -49,25 +42,15 @@ ListingModal.propTypes = {
   listing: PropTypes.shape({
     listingTitle: PropTypes.string,
     price: PropTypes.number,
-    condition: PropTypes.string,
-    owner: PropTypes.string,
-    description: PropTypes.string,
-    tags: PropTypes.string,
-    _id: PropTypes.string,
     images: PropTypes.arrayOf(PropTypes.string),
   }),
+  onReportClick: PropTypes.func.isRequired,
 };
 
-// Provide default values for the prop
 ListingModal.defaultProps = {
   listing: {
     listingTitle: '',
     price: 0,
-    condition: '',
-    owner: '',
-    description: '',
-    tags: '',
-    _id: '',
     images: [],
   },
 };
