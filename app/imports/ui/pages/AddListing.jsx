@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Col, Container, Row, Image } from 'react-bootstrap';
+import { Card, Col, Container, Row, Image, Button } from 'react-bootstrap';
 import { AutoForm, ErrorsField, LongTextField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -41,6 +41,10 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 
 const AddListing = () => {
   const [imagesSelected, setImagesSelected] = useState([]);
+  const handleImageDelete = (index) => {
+    setImagesSelected(imagesSelected.filter((_, i) => i !== index));
+    console.log(`this is running${imagesSelected.length}`);
+  };
 
   const handleImagePreview = (selectedFiles) => {
     setImagesSelected(selectedFiles);
@@ -95,7 +99,10 @@ const AddListing = () => {
                 <UploadFile handleImagePreview={handleImagePreview} />
 
                 {imagesSelected.map((url, index) => (
-                  <Image key={index} src={URL.createObjectURL(url)} thumbnail />
+                  <div key={index}>
+                    <Image src={URL.createObjectURL(url)} thumbnail />
+                    <Button onClick={() => handleImageDelete(index)}>Delete </Button>
+                  </div>
                 ))}
 
                 {/* Submit button and error handling */}
