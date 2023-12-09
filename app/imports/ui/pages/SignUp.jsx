@@ -20,14 +20,18 @@ const SignUp = ({ location }) => {
 
   const submit = (doc) => {
     const { email, password } = doc;
-    Accounts.createUser({ email, username: email, password }, (err) => {
-      if (err) {
-        setError(err.reason);
-      } else {
-        setError('');
-        setRedirectToRef(true);
-      }
-    });
+    if (!email.endsWith('@hawaii.edu')) {
+      setError('Only emails ending with @hawaii.edu are allowed to register.');
+    } else {
+      Accounts.createUser({ email, username: email, password }, (err) => {
+        if (err) {
+          setError(err.reason);
+        } else {
+          setError('');
+          setRedirectToRef(true);
+        }
+      });
+    }
   };
 
   const { from } = location?.state || { from: { pathname: '/add' } };
