@@ -1,8 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
+import { check } from 'meteor/check';
 import { Listings } from '../../api/listing/Listing';
 import { Profiles } from '../../api/Profile/Profiles';
 import { Reports } from '../../api/reports/Reports';
+import { Messages } from '../../api/messages/Messages';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
@@ -22,6 +24,14 @@ Meteor.publish(Profiles.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Messages.userPublicationName, function () {
+  if (this.userId) {
+    // Adjust the logic based on your requirements for publishing user-specific messages
+    return Messages.collection.find();
+  }
+  return this.ready();
+});
+
 Meteor.publish('allListings', function () {
   return Listings.collection.find();
 });
@@ -34,9 +44,18 @@ Meteor.publish(Listings.adminPublicationName, function () {
   }
   return this.ready();
 });
+
 Meteor.publish(Reports.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Reports.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Messages.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    // Adjust the logic based on your requirements for publishing all messages
+    return Messages.collection.find();
   }
   return this.ready();
 });
@@ -48,4 +67,9 @@ Meteor.publish(null, function () {
     return Meteor.roleAssignment.find({ 'user._id': this.userId });
   }
   return this.ready();
+});
+Meteor.publish('userMessages', function (userId) {
+  check(userId, String); // Add this line to check the userId argument
+  // Publish messages for a specific user
+  return Messages.find({ $or: [{ sender: userId }, { receiver: userId }] });
 });

@@ -6,7 +6,8 @@ import ListItem from '../components/ListingItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import SideBar from '../components/SideBar';
 import ListingModal from '../components/ListingModal';
-import ReportModal from '../components/ReportModal'; // Import the ReportModal component
+import ReportModal from '../components/ReportModal';
+import MessageThreadModal from '../components/MessageThreadModal'; // Import the MessageThreadModal component
 import { Listings } from '../../api/listing/Listing';
 
 const ItemsForSale = () => {
@@ -15,6 +16,8 @@ const ItemsForSale = () => {
   const [selectedListing, setSelectedListing] = useState(null);
   const [showReportModal, setShowReportModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedSeller, setSelectedSeller] = useState(null);
+  const [showMessageThreadModal, setShowMessageThreadModal] = useState(false);
 
   const { ready, listings } = useTracker(() => {
     const subscription = Meteor.subscribe('allListings');
@@ -47,6 +50,18 @@ const ItemsForSale = () => {
     setShowReportModal(false);
   };
 
+  const handleShowMessageThreadModal = (listingId, sellerName) => {
+    setSelectedItem(listingId);
+    setSelectedSeller(sellerName);
+    setShowMessageThreadModal(true);
+  };
+
+  const handleCloseMessageThreadModal = () => {
+    setShowMessageThreadModal(false);
+    setSelectedItem(null);
+    setSelectedSeller(null);
+  };
+
   return ready ? (
     <Container className="py-3">
       <Row>
@@ -63,6 +78,7 @@ const ItemsForSale = () => {
                       listing={listing}
                       onClick={() => handleShowModal(listing)}
                       onReportClick={() => handleReportClick(listing)}
+                      onMessageClick={() => handleShowMessageThreadModal(listing._id, listing.owner)}
                     />
                   </Card.Body>
                 </Card>
@@ -85,6 +101,15 @@ const ItemsForSale = () => {
           show={showReportModal}
           handleClose={handleCloseReportModal}
           item={selectedItem}
+        />
+      )}
+      {selectedItem && (
+        <MessageThreadModal
+          show={showMessageThreadModal}
+          handleClose={handleCloseMessageThreadModal}
+          listingId={selectedItem}
+          sellerName={selectedSeller}
+          userId={Meteor.userId()} // Pass the current user's ID
         />
       )}
     </Container>

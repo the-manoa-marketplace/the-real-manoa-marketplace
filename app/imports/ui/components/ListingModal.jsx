@@ -2,15 +2,39 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Image, Carousel, Button } from 'react-bootstrap';
 import ReportModal from './ReportModal';
+import ContactSellerModal from './ContactSellerModal';
+import MessageThreadModal from './MessageThreadModal'; // Import the new component
 
 const ListingModal = ({ showModal, handleClose, listing }) => {
   const [showReportModal, setShowReportModal] = useState(false);
+  const [showContactSellerModal, setShowContactSellerModal] = useState(false);
+  const [showMessageThreadModal, setShowMessageThreadModal] = useState(false);
+  const [messageThread, setMessageThread] = useState([]);
 
   const handleShowReportModal = () => setShowReportModal(true);
   const handleCloseReportModal = () => setShowReportModal(false);
 
   const handleReportClick = () => {
     handleShowReportModal();
+  };
+
+  const handleShowContactSellerModal = () => setShowContactSellerModal(true);
+  const handleCloseContactSellerModal = () => setShowContactSellerModal(false);
+
+  const handleShowMessageThreadModal = () => {
+    // Assume messages are retrieved from a database or another source
+    const initialMessages = ['Hello, is the item still available?', 'Yes, it is.'];
+    setMessageThread(initialMessages);
+    setShowMessageThreadModal(true);
+  };
+
+  const handleCloseMessageThreadModal = () => setShowMessageThreadModal(false);
+
+  const handleSendMessageToSeller = (newMessage) => {
+    // Add logic to save the new message to the message thread
+    setMessageThread([...messageThread, newMessage]);
+    // Close the Contact Seller modal (if open)
+    handleCloseContactSellerModal();
   };
 
   return (
@@ -55,11 +79,34 @@ const ListingModal = ({ showModal, handleClose, listing }) => {
           <Button variant="outline-danger" onClick={handleReportClick}>
             Report
           </Button>
+          <Button variant="primary" onClick={handleShowContactSellerModal}>
+            Contact Seller
+          </Button>
+          <Button variant="info" onClick={handleShowMessageThreadModal}>
+            View Messages
+          </Button>
         </Modal.Footer>
       </Modal>
 
       {/* Render the ReportModal */}
       <ReportModal show={showReportModal} handleClose={handleCloseReportModal} item={listing} />
+
+      {/* Render the ContactSellerModal */}
+      <ContactSellerModal
+        show={showContactSellerModal}
+        handleClose={handleCloseContactSellerModal}
+        sellerName={listing?.owner || 'Seller'}
+        onSendMessage={handleSendMessageToSeller}
+      />
+
+      {/* Render the MessageThreadModal */}
+      <MessageThreadModal
+        show={showMessageThreadModal}
+        handleClose={handleCloseMessageThreadModal}
+        messages={messageThread}
+        sellerName={listing?.owner || 'Seller'}
+        onSendMessage={handleSendMessageToSeller}
+      />
     </>
   );
 };
