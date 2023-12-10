@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Navigate } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
-import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
+import {Alert, Button, Card, Col, Container, Image, Row} from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import UploadFile from "../components/UploadFile";
 
 const SignUp = ({ location }) => {
   const [error, setError] = useState('');
@@ -14,7 +15,17 @@ const SignUp = ({ location }) => {
   const schema = new SimpleSchema({
     email: String,
     password: String,
-    fullName: { type: String, optional: true },
+    fullName: String,
+    address: String,
+    description: String,
+    Profile Picture: {
+      type: Array,
+      optional: true,
+    },
+    'images.$': {
+      type: String,
+      optional: true,
+    },
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
@@ -42,14 +53,19 @@ const SignUp = ({ location }) => {
   return (
     <Container id="signup-page" className="py-3">
       <Row className="justify-content-center">
-        <Col xs={5}>
-          <h2>Register your account</h2>
+        <Col xs={5} >
+          <h2 className="text-center">Register your account</h2>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
-                <TextField name="email" placeholder="E-mail address" />
+                <TextField name="fullName" placeholder="Full name" />
+                <TextField name="images" placeholder="Upload a profile picture" />
+                <TextField name="email" placeholder="Enter a UH email address" />
+                <TextField name="address" placeholder="Address" />
+                <LongTextField name="description" placeholder="Description" />
                 <TextField name="password" placeholder="Password" type="password" />
-                <TextField name="fullName" placeholder="Full Name (optional)" />
+
+
                 <ErrorsField />
                 <SubmitField />
               </Card.Body>
