@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Image, Carousel, Button } from 'react-bootstrap';
 import ReportModal from './ReportModal';
+import MessageUserModal from '../pages/MessageUserModal';
 
 const ListingModal = ({ showModal, handleClose, listing }) => {
   const [showReportModal, setShowReportModal] = useState(false);
 
   const handleShowReportModal = () => setShowReportModal(true);
   const handleCloseReportModal = () => setShowReportModal(false);
+
+
+  // MessageModal setup
+  const [showMessageModal, setShowMessageModal] = useState(false);
+
+  const handleShowMessageModal = () => setShowMessageModal(true);
+  const handleCloseMessageModal = () => setShowMessageModal(false);
 
   const handleReportClick = () => {
     handleShowReportModal();
@@ -52,11 +60,21 @@ const ListingModal = ({ showModal, handleClose, listing }) => {
           {/* Add other details as needed */}
         </Modal.Body>
         <Modal.Footer>
+          <Button className="align-content-start" variant="outline-dark" onClick={handleShowMessageModal}>
+            Message Seller
+          </Button>
           <Button variant="outline-danger" onClick={handleReportClick}>
             Report
           </Button>
         </Modal.Footer>
       </Modal>
+
+      {/* Render the MessageUserModal */}
+      <MessageUserModal
+        show={showMessageModal}
+        handleClose={handleCloseMessageModal}
+        recipient={listing.owner} // Pass the recipient's name or ID here
+      />
 
       {/* Render the ReportModal */}
       <ReportModal show={showReportModal} handleClose={handleCloseReportModal} item={listing} />
