@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-const ContactSellerModal = ({ show, handleClose, sellerName }) => {
+const ContactSellerModal = ({ show, handleClose, sellerName, userEmail }) => {
   const [message, setMessage] = useState('');
 
   const handleSendMessage = () => {
     // Implement your logic to send the message
-    console.log(`Message to ${sellerName}: ${message}`);
+    console.log(`Message from ${userEmail} to ${sellerName}: ${message}`);
     // Add your logic to send the message to the seller
     // You might want to use a Meteor method or another communication mechanism
-    // Reset the message input
+    // Reset the message inpuwt
     setMessage('');
     // Close the modal
     handleClose();
@@ -49,6 +49,7 @@ ContactSellerModal.propTypes = {
   show: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   sellerName: PropTypes.string.isRequired,
+  userEmail: PropTypes.string.isRequired,
 };
 
 export default ContactSellerModal;

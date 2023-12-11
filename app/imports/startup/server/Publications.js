@@ -26,6 +26,8 @@ Meteor.publish(Profiles.userPublicationName, function () {
 
 Meteor.publish(Messages.userPublicationName, function () {
   if (this.userId) {
+    const messages = Messages.collection.find();
+    console.log(`Publishing ${messages.count()} messages for user ${this.userId}`);
     // Adjust the logic based on your requirements for publishing user-specific messages
     return Messages.collection.find();
   }
@@ -68,8 +70,13 @@ Meteor.publish(null, function () {
   }
   return this.ready();
 });
-Meteor.publish('userMessages', function (userId) {
-  check(userId, String); // Add this line to check the userId argument
-  // Publish messages for a specific user
-  return Messages.find({ $or: [{ sender: userId }, { receiver: userId }] });
+// eslint-disable-next-line consistent-return
+Meteor.publish('userMessages', function () {
+  const userId = this.userId;
+  if (userId) {
+    const messages = Messages.collection.find({ sender: userId });
+    console.log(`Publishing ${messages.count()} messages for user ${userId}`);
+    return messages; // Return the messages cursor directly
+  }
+  return this.ready();
 });

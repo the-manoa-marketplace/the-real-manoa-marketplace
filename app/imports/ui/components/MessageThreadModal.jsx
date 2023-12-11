@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
 import { Modal, Button, Form, ListGroup } from 'react-bootstrap';
 import { Messages } from '../../api/messages/Messages';
 
-const MessageThreadModal = ({ show, handleClose, listingId, sellerName, userId }) => {
+const MessageThreadModal = ({ show, handleClose, listingId, sellerName, userEmail }) => {
   const [newMessage, setNewMessage] = useState('');
   const [messageThread, setMessageThread] = useState([]);
+  console.log('userEmail:', userEmail);
+  console.log('sellerName:', sellerName);
 
   useEffect(() => {
     const fetchMessages = async () => {
       try {
         const messages = await Messages.find({
           $or: [
-            { listingId, sender: userId, receiver: sellerName },
-            { listingId, sender: sellerName, receiver: userId },
+            { listingId, sender: userEmail, receiver: sellerName },
+            { listingId, sender: sellerName, receiver: userEmail },
           ],
         }).fetch();
         setMessageThread(messages);
@@ -25,18 +28,27 @@ const MessageThreadModal = ({ show, handleClose, listingId, sellerName, userId }
     fetchMessages();
 
     return undefined;
-  }, [listingId, userId, sellerName]);
+  }, [listingId, userEmail, sellerName]);
 
   const handleSendMessage = async () => {
-    await Messages.insert({
-      sender: userId,
-      receiver: sellerName,
-      listingId,
+    // eslint-disable-next-line no-shadow
+
+    const user = Meteor.users.findOne({ 'emails.address': sellerName });
+    let userId;
+    if (user) {
+      userId = user._id;
+    } else {
+      console.log('No user found with email:', sellerName);
+    }
+    console.log('userId:', userId);
+    await Messages.collection.insert({
+      sender: Meteor.userId(),
+      receiver: userId,
       message: newMessage,
-      createdAt: new Date(),
+      timestamp: new Date(),
     });
 
-    setMessageThread([...messageThread, { sender: userId, message: newMessage }]);
+    setMessageThread([...messageThread, { sender: userEmail, message: newMessage }]);
     setNewMessage('');
   };
 
@@ -78,7 +90,7 @@ MessageThreadModal.propTypes = {
   handleClose: PropTypes.func.isRequired,
   listingId: PropTypes.string.isRequired,
   sellerName: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
+  userEmail: PropTypes.string.isRequired,
 };
 
 export default MessageThreadModal;

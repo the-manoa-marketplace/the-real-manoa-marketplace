@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Image, Carousel, Button } from 'react-bootstrap';
+import { Meteor } from 'meteor/meteor';
 import ReportModal from './ReportModal';
 import ContactSellerModal from './ContactSellerModal';
 import MessageThreadModal from './MessageThreadModal'; // Import the new component
@@ -10,7 +11,13 @@ const ListingModal = ({ showModal, handleClose, listing }) => {
   const [showContactSellerModal, setShowContactSellerModal] = useState(false);
   const [showMessageThreadModal, setShowMessageThreadModal] = useState(false);
   const [messageThread, setMessageThread] = useState([]);
-
+  const userId = Meteor.userId(); // Get the userId directly from Meteor
+  const user = Meteor.users.findOne(userId); // Get the user document
+  let userEmail;
+  if (user && user.emails && user.emails[0]) {
+    userEmail = user.emails[0].address;
+  }
+  console.log('userEmfwfail:', userEmail);
   const handleShowReportModal = () => setShowReportModal(true);
   const handleCloseReportModal = () => setShowReportModal(false);
 
@@ -96,15 +103,18 @@ const ListingModal = ({ showModal, handleClose, listing }) => {
         show={showContactSellerModal}
         handleClose={handleCloseContactSellerModal}
         sellerName={listing?.owner || 'Seller'}
+        userEmail={userEmail} // Pass userEmail as a prop
+        userId={userId} // Pass userId as a prop
         onSendMessage={handleSendMessageToSeller}
       />
 
-      {/* Render the MessageThreadModal */}
       <MessageThreadModal
         show={showMessageThreadModal}
         handleClose={handleCloseMessageThreadModal}
         messages={messageThread}
         sellerName={listing?.owner || 'Seller'}
+        userEmail={userEmail} // Pass userEmail as a prop
+        userId={userId} // Pass userId as a prop
         onSendMessage={handleSendMessageToSeller}
       />
     </>
