@@ -73,6 +73,13 @@ const SignUp = ({ location }) => {
             } else {
               setError('');
               setRedirectToRef(true);
+
+              // Swal confirmation for successful profile registration
+              swal('Success', 'Profile successfully registered', 'success').then(() => {
+                // Redirect to the home page after successful registration
+                // eslint-disable-next-line no-restricted-globals
+                location.href = '/';
+              });
             }
           }
       );
