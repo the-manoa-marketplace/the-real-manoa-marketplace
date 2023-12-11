@@ -46,7 +46,7 @@ const App = () => {
           <Route path="/signout" element={<SignOut />} />
           <Route exact path="/" element={<ProtectedRoute><ItemsForSale /></ProtectedRoute>} />
           <Route exact path="/profile" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
-          <Route exact path="/EditUserPage" element={<ProtectedRoute><EditUserPage /></ProtectedRoute>} />
+          <Route exact path="/editpfp" element={<ProtectedRoute><EditUserPage /></ProtectedRoute>} />
           <Route exact path="/contactus" element={<ProtectedRoute><ContactUs /></ProtectedRoute>} />
           <Route exact path="/tos" element={<ProtectedRoute><TermsOfService /></ProtectedRoute>} />
           <Route exact path="/pp" element={<ProtectedRoute><PrivacyPolicy /></ProtectedRoute>} />

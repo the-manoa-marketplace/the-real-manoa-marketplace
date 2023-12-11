@@ -52,7 +52,7 @@ const Profile = ({ profile }) => {
                         <h2>{profile.firstName} {profile.lastName}</h2>
                         <p className="text-muted">{profile.address}</p>
                         <p>{profile.description}</p>
-                        <Link to={`/edit/:_id${profile._id}`}>
+                        <Link to={`/editpfp/${profile._id}`}>
                             <Button variant="primary">Edit Profile</Button>
                         </Link>
                         <Button variant="secondary" onClick={handleClose} className="ml-2">
