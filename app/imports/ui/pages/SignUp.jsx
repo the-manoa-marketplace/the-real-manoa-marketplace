@@ -7,8 +7,9 @@ import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { Profiles } from '../../api/Profile/Profiles';
-import CloudinaryUpload from "../services/CloudinaryUpload";
+import CloudinaryUpload from '../services/CloudinaryUpload';
 
+// eslint-disable-next-line react/prop-types
 const UploadFile = ({ handleImagePreview }) => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -16,10 +17,11 @@ const UploadFile = ({ handleImagePreview }) => {
   };
 
   return (
-      <div>
-        <label htmlFor="fileInput">Upload Profile Picture:</label>
-        <input type="file" id="fileInput" onChange={handleFileChange} />
-      </div>
+    <div>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+      <label htmlFor="fileInput">Upload Profile Picture:</label>
+      <input type="file" id="fileInput" onChange={handleFileChange} />
+    </div>
   );
 };
 
@@ -56,32 +58,33 @@ const SignUp = ({ location }) => {
 
       // Insert profile into the Profiles collection
       Profiles.insertProfile(
-          {
-            name,
-            address,
-            description: bio,
-            owner: email,
-          },
-          uploadedPicture
+        {
+          name,
+          address,
+          description: bio,
+          owner: email,
+        },
+        uploadedPicture,
       );
 
       Accounts.createUser(
-          { email, username: email, password, profile: { name, address, bio, picture: uploadedPicture } },
-          (err) => {
-            if (err) {
-              setError(err.reason);
-            } else {
-              setError('');
-              setRedirectToRef(true);
+        { email, username: email, password, profile: { name, address, bio, picture: uploadedPicture } },
+        (err) => {
+          if (err) {
+            setError(err.reason);
+          } else {
+            setError('');
+            setRedirectToRef(true);
 
-              // Swal confirmation for successful profile registration
-              swal('Success', 'Profile successfully registered', 'success').then(() => {
-                // Redirect to the home page after successful registration
-                // eslint-disable-next-line no-restricted-globals
-                location.href = '/';
-              });
-            }
+            // Swal confirmation for successful profile registration
+            // eslint-disable-next-line no-undef
+            swal('Success', 'Profile successfully registered', 'success').then(() => {
+              // Redirect to the home page after successful registration
+              // eslint-disable-next-line no-restricted-globals,react/prop-types,no-param-reassign
+              location.href = '/';
+            });
           }
+        },
       );
     }
   };
@@ -96,51 +99,52 @@ const SignUp = ({ location }) => {
   }
 
   return (
-      <Container id="signup-page" className="py-3">
-        <Row className="justify-content-center">
-          <Col xs={5}>
-            <h2 className="text-center">Register your account</h2>
-            <AutoForm schema={bridge} onSubmit={(data) => submit(data)}>
-              <Card>
-                <Card.Body>
-                  {/* Image upload component */}
-                  <UploadFile handleImagePreview={handleImagePreview} />
+    <Container id="signup-page" className="py-3">
+      <Row className="justify-content-center">
+        <Col xs={5}>
+          <h2 className="text-center">Register your account</h2>
+          <AutoForm schema={bridge} onSubmit={(data) => submit(data)}>
+            <Card>
+              <Card.Body>
+                {/* Image upload component */}
+                <UploadFile handleImagePreview={handleImagePreview} />
 
-                  {pictureSelected && (
-                      <div>
-                        <Image src={pictureSelected instanceof File ? URL.createObjectURL(pictureSelected) : pictureSelected} thumbnail />
-                        <Button onClick={() => setPictureSelected(null)}>Delete </Button>
-                      </div>
-                  )}
+                {pictureSelected && (
+                  <div>
+                    <Image src={pictureSelected instanceof File ? URL.createObjectURL(pictureSelected) : pictureSelected} thumbnail />
+                    <Button onClick={() => setPictureSelected(null)}>Delete </Button>
+                  </div>
+                )}
 
-                  <TextField name="name" placeholder="Full name" />
-                  <TextField name="email" placeholder="Enter a UH email address" />
-                  <TextField name="address" placeholder="Address" />
-                  <LongTextField name="bio" placeholder="Enter a description" />
-                  <TextField name="password" placeholder="Password" type="password" />
+                <TextField name="name" placeholder="Full name" />
+                <TextField name="email" placeholder="Enter a UH email address" />
+                <TextField name="address" placeholder="Address" />
+                <LongTextField name="bio" placeholder="Enter a description" />
+                <TextField name="password" placeholder="Password" type="password" />
 
-                  <ErrorsField />
-                  <SubmitField />
-                </Card.Body>
-              </Card>
-            </AutoForm>
-            <Alert variant="light">
-              Already have an account? Login <Link to="/signin">here</Link>
+                <ErrorsField />
+                <SubmitField />
+              </Card.Body>
+            </Card>
+          </AutoForm>
+          <Alert variant="light">
+            Already have an account? Login <Link to="/signin">here</Link>
+          </Alert>
+          {error && (
+            <Alert variant="danger">
+              <Alert.Heading>Registration was not successful</Alert.Heading>
+              {error}
             </Alert>
-            {error && (
-                <Alert variant="danger">
-                  <Alert.Heading>Registration was not successful</Alert.Heading>
-                  {error}
-                </Alert>
-            )}
-          </Col>
-        </Row>
-      </Container>
+          )}
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
 SignUp.propTypes = {
   location: PropTypes.shape({
+    // eslint-disable-next-line react/forbid-prop-types
     state: PropTypes.object,
   }),
 };
