@@ -12,7 +12,7 @@ const EditUserPage = () => {
 
   // Fetch user profile data
   const { user } = useTracker(() => {
-    const = Meteor.subscribe(Profiles.userPublicationName); // Replace with your publication name
+    const sub = Meteor.subscribe(Profiles.userPublicationName); // Replace with your publication name
     const user = Profiles.collection.findOne({ owner: Meteor.user().username });
 
     return { user };
